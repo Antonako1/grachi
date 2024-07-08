@@ -88,47 +88,9 @@ SectionEnd
 ############# SETUP ################
 Section 
 
-runSetup:
-
-File "setup.ps1"
-
-; Execute setup.ps1 script
-nsExec::ExecToLog 'Powershell.exe -ExecutionPolicy Bypass -File "$INSTALL_DIR\setup.ps1" "$INSTALL_DIR" "no"'
-
-; Check if setup ran succesfully
-Pop $0
-${If} $0 == "0"
-    DetailPrint "Setup sequence completed with success."
-${Else}
-    DetailPrint "Failed to run setup."
-    MessageBox MB_ABORTRETRYIGNORE|MB_ICONEXCLAMATION "Error running setup. Retry by pressing 'Retry', \
-    ignore the error and continue by pressing 'Ignore', or close the program by pressing 'Abort'." IDABORT abortM IDIGNORE ignoreM
-        ; Run setup again
-        DetailPrint "Running setup again."
-        ; After executing, delete it
-        Delete "setup.ps1"
-        Goto runSetup
-    ignoreM:
-        ; Continue setup
-        DetailPrint "Continuing setup."
-        ; After executing, delete it
-        Delete "setup.ps1"
-        Goto Continue
-    abortM:
-        ; Abort
-        ; After executing, delete it
-        Delete "setup.ps1"
-        Abort "Setup aborted by user."
-${EndIf}
-Continue:
-; After executing, delete it
-Delete "setup.ps1"
-
 ########## EXTRACTION ##########
 ; Extract files based on section selection
 
-; Extract uninstallation script
-File "uninstall.ps1"
 
 ; Create an uninstaller in the same directory as the installer
 WriteUninstaller "$INSTALL_DIR\Uninstall.exe"
@@ -142,17 +104,11 @@ UninstPage uninstConfirm
 UninstPage instfiles
 
 Section "Uninstall"
-; Execute the PowerShell script with elevated privileges and pass the parameters
-nsExec::ExecToLog 'Powershell.exe -ExecutionPolicy Bypass -File "$INSTDIR\uninstall.ps1" "$INSTDIR"'
-
 ########################### DELETE FILES ###########################
 ; Remove installed files during uninstallation
 
 Delete "$INSTDIR\${PROJECTNAME}.exe"
 Delete "$INSTDIR\license"
-Delete "$INSTDIR\README.txt"
-Delete "$INSTDIR\setup.ps1"
-Delete "$INSTDIR\uninstall.ps1"
 
 ; Remove the installation directory if it still exists
 RMDir /r $INSTDIR

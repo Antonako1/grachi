@@ -6,16 +6,6 @@ cd /d %~dp0
 call ..\win\scripts\globals.bat
 cd /d %~dp0
 
-REM STANDALONE BUILDING
-RMDIR /S /Q .\output
-set BUILD_DIR=.\output\win
-mkdir %BUILD_DIR%
-call ..\win\batch\del.bat
-call .\win\build.bat "Release"
-cd /d %~dp0
-COPY /Y/B ..\build\win\%PROJECTNAME%.exe %BUILD_DIR%
-"C:\Program Files\7-Zip\7z.exe" a -tzip %BUILD_DIR%\%PROJECTNAME%-ver_%_VERSION_%-win-%ARCH%-standalone.zip %BUILD_DIR%\%PROJECTNAME%.exe
-
 REM INSTALLER BUILDING
 if not exist %BUILD_DIR%\nsis mkdir %BUILD_DIR%\nsis
 COPY .\installer.nsi %BUILD_DIR%\nsis

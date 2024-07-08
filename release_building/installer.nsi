@@ -6,7 +6,7 @@ unicode True
 !define WM_SETTINGCHANGE 0x001A
 
 !define VERSION "0.0.1"
-!define PROJECTNAME "C_CPP_BASE"
+!define PROJECTNAME "grachi"
 
 Outfile "${PROJECTNAME}-win-installer-v${VERSION}.exe"
 BrandingText /TRIMCENTER "${PROJECTNAME} Setup V${VERSION}"

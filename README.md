@@ -1,34 +1,36 @@
-Build and run
+## Build and run
 
-    Windows, visual studio:
-    C++ CMake tools for windows
-    C++ v14.xx build tools for (processor)
-    MSVC build tools
+### Requirements:
+    
+- OpenCV [4.10.0](https://opencv.org/releases/)
+    - Download Windows version and copy the contents of \build\ directory into .\opencv\
+- ATRC's latest [release](https://github.com/Antonako1/ATRC/releases)
 
-    Linux:
-    cmake, ninja and somekind of C/C++ compiler
+### Windows, Visual Studio:
 
-    NOTE: See .\<win|linux>\<batch|shell>\globals.<bat|sh>. Enter your paths there, or the executable programs if they are found in the path
+- C++ CMake tools for windows
+- C++ v14.xx build tools for (processor)
+- MSVC build tools
 
-    initialize new git repository:
-    .\start.<bat|sh>
+#### NOTE: See .\win\scripts\globals.bat. Enter your paths there, or the executable programs if they are found in the path
 
-    build project:
-    .\<win|linux>\build.<bat|sh>
+#### Build project:
 
-    run project:
-    .\<win|linux>\run.<bat|sh> [args...]
+- .\win\build.bat
 
-    build and run the project:
-    .\build_n_run.<bat|sh> [args...]
+#### Run project:
 
-    clear build:
-    .\<win|linux>\<batch|shell>\del.<bat|sh>
+- .\win\run.bat [args...]
+
+#### Build and run the project:
+
+- .\build_n_run.bat [args...]
+
+#### Clear build:
+
+- .\win\scripts\del.bat
 
 
-Releasing:
+#### Releasing:
 
-    In .\release_building, run win.bat and then linux.sh
-    You may have to modify the order yourself or the release build process
-
-    Change project names in .nsi and check the whole .AppDir, it is named as "C_CPP_BASE"
+    In .\release_building, run win.bat

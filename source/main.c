@@ -2,12 +2,12 @@
 #include "stdlib.h"
 #include "main.h"
 
+// #include <core>
+
 int main(int argc, char const *argv[]){
-    printf("running functions!\n");
+    #ifdef DEBUG
+    printf("Debugmode\n");
+    #endif
 
-    const char *str = "teststring";
-    print_message(str);
-
-    cpp_call(argc, argv);
     return 0;
 }

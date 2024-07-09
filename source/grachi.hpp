@@ -6,7 +6,7 @@
 // absolute path, pointing to exe's directory
 extern std::string project_root_path;
 
-// absolute path, pointing to: \assets\data\ 
+// absolute path, pointing to: \assets\data\           ----
 extern std::string atrc_path;
 
 #endif // MAIN_H

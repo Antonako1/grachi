@@ -1,0 +1,46 @@
+[ARMAMENT]
+! Place here the armament type
+! GENERAL_TYPE      | Type
+! ===================
+! AIR_TO_AIR        | AH    = Air to Air Heat seeking missile
+! AIR_TO_AIR        | AR    = Air to Air Radar seeking missile
+! AIR_TO_AIR        | AA    = Air to Air Active radar seeking missile
+! AIR_TO_GROUND     | LB    = Laser-quided Bomb
+! AIR_TO_GROUND     | TB    = TV-quided Bomb
+! AIR_TO_GROUND     | B     = Unquided Bomb
+! AIR_TO_GROUND     | LR    = Laser-quided rocket
+! AIR_TO_GROUND     | TV    = TV-quided rocket
+! AIR_TO_GROUND     | R     = Unquided rocket
+! FUEL_TANK         | F     = Fuel tank
+! COUNTERMEASURE_POD|C      = Countermeasure pod
+! GUN_POD           | G     = Gunpod
+type=B
+
+! Place here the general type of the armament
+general_type=AIR_TO_GROUND
+
+! Name of the armament. Will be displayed in the game
+name=bomb
+! Name in second locale. Will be displayed in the game
+name_2locale=бомба
+
+! If the armament is an air to air weapon, delete every block and their contents
+! except this one
+[AIR_TO_AIR]
+
+! If the armament is an air to ground weapon, delete every block and their contents
+! except this one
+[AIR_TO_GROUND]
+
+
+! If the armament is a fuel tank, delete every block and their contents
+! except this one
+[FUEL_TANK]
+
+! If the armament is a Countermeasure pod, delete every block and their contents
+! except this one
+[COUNTERMEASURE_POD]
+
+! If the armament is a gun pod, delete every block and their contents
+! except this one
+[GUN_POD]

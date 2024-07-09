@@ -33,18 +33,17 @@ int main(int argc, char const *argv[]){
     project_root_path = get_project_root_path();
     atrc_path = project_root_path + "\\assets\\data\\";
     initialize_asset_data();
+    
+    // std::cout << read_key_as_string(fd_su25.get(), "vehicle", "pylon_amount") << std::endl;
+    // change_key_value(fd_su25.get(), "vehicle", "pylon_amount", "1");
+    // std::cout << read_key_as_string(fd_su25.get(), "vehicle", "pylon_amount") << std::endl;
 
-
-    sf::RenderWindow window(sf::VideoMode(800, 600), "grachi");
+    sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
     sf::Font font;
-
     std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
     if (!font.loadFromFile(fontPath)) {
         m_nrm("Error loading the font", FONT_ERROR, FL_GRACHI, true);
     }
-
-
-
     std::string str="Русский текст тут абв!";
     m_dbg(str);
     

@@ -83,5 +83,5 @@ std::unique_ptr<ATRCFiledata> reader(const std::string& filename) {
 std::unique_ptr<ATRCFiledata> fd_su25 = nullptr;
 
 void initialize_asset_data(){
-    fd_su25 = reader("planes\\su25.atrc");
+    fd_su25 = reader("vehicles\\planes\\su25.atrc");
 }

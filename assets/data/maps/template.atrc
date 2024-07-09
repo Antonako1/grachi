@@ -1,0 +1,25 @@
+[MAP_DATA]
+
+! folder for the map in assets\images\maps folder
+map_folder=afghanistan
+
+! name of the map
+map_name=main_map.png
+
+! terrain map
+map_terrain=terrain_map.png
+
+! height of the map in kilometers
+map_height=1000
+
+! width of the map in kilometers
+map_width=1000
+
+[LOCATIONS]
+! When a location is added, it must exist with the given
+! name in the assets\data\locations\ folder.
+! naming must be done in the following way: "location_{1->onwards}
+location_1=airbase1
+
+! Put here the amount of locations
+locations=15

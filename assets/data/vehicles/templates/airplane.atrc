@@ -1,0 +1,56 @@
+[VEHICLE]
+type=airplane
+name=airplane
+name_2locale=самолет
+
+! Place here the amount of pylons the plane has. 
+pylon_amount=10
+
+! Make corresponding amount of pylon keys.
+! Here we have 10 pylons, 1 is the left-most pylon, 10 is the right-most pylon
+
+
+! Place here what the pylon is allowed to carry, seperate different types with a comma ','
+! AH    = Air to Air Heat seeking missile
+! AR    = Air to Air Radar seeking missile
+! AA    = Air to Air Active radar seeking missile
+! LB    = Laser-quided Bomb
+! TB    = TV-quided Bomb
+! B     = Unquided Bomb
+! LR    = Laser-quided rocket
+! TV    = TV-quided rocket
+! R     = Unquided rocket
+! F     = Fuel tank
+pylon_1_contents    =AH,AR,AA
+
+! If you want a ready made "preset" for the airplane
+! place here the weapon you want it to carry.
+! The type must exist in \planes\armament\ folder
+pylon_1             =
+
+pylon_2             = 
+pylon_2_contents    = 
+
+pylon_3             = 
+pylon_3_contents    = 
+
+pylon_4             = 
+pylon_4_contents    = 
+
+pylon_5             = 
+pylon_5_contents    = 
+
+pylon_6             = 
+pylon_6_contents    = 
+
+pylon_7             = 
+pylon_7_contents    = 
+
+pylon_8             = 
+pylon_8_contents    = 
+
+pylon_9             = 
+pylon_9_contents    = 
+
+pylon_10            = 
+pylon_10_contents   = 

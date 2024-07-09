@@ -1,0 +1,36 @@
+[MAP_DATA]
+
+! folder for the map in assets\images\maps folder
+%map_name%=afghanistan
+map_folder=%map_name%
+
+<%map_shortcut%=%map_name%_plain
+! name of the map
+map_name=%map_shortcut%.bmp
+
+! map with provinces
+map_provinces=%map_shortcut%_provinces.bmp
+
+! provinces with names
+map_named_provinces=%map_shortcut%_provinces_named.bmp
+
+! map with rivers
+map_rivers=%map_shortcut%_rivers.bmp
+
+! terrain map
+map_terrain=%map_name%_terrain.bmp
+
+! height of the map in kilometers
+map_height=560
+
+! width of the map in kilometers
+map_width=1240
+
+[LOCATIONS]
+! When a location is added, it must exist with the given
+! name in the assets\data\locations\ folder.
+! naming must be done in the following way: "location_{1->onwards}
+location_1=airbase1
+
+! Put here the amount of locations
+locations=15

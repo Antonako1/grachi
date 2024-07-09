@@ -1,0 +1,4 @@
+#ifndef GROUND_VEHICLE_H
+#define GROUND_VEHICLE_H
+
+#endif // GROUND_VEHICLE_H

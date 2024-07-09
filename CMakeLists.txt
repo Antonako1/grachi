@@ -42,10 +42,17 @@ endif()
 
 # Set the paths to your source files
 file(GLOB SOURCES 
-"source/*.c"
-"source/*.h"
-"source/*.cpp"
-"source/*.hpp"
+"source/atrc_fd.cpp"
+"source/atrc_fd.hpp"
+"source/grachi.cpp"
+"source/grachi.hpp"
+"source/msg.cpp"
+"source/msg.hpp"
+"source/styling.hpp"
+"source/vehicles/airplane.cpp"
+"source/vehicles/airplane.hpp"
+"source/vehicles/ground_vehicle.hpp"
+"source/vehicles/ground_vehicle.hpp"
 )
 
 # Look for ATRC library

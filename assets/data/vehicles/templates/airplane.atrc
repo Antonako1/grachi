@@ -1,7 +1,17 @@
 [VEHICLE]
-type=airplane
-name=airplane
-name_2locale=самолет
+! Types:
+! cas   = close air support / strike aircraft
+! fgh   = figher aircraft
+! bmb   = bomber aircraft
+! awa   = AWACS
+! het   = transport helicopter
+! hea   = attack helicopter
+! crg   = cargo aircraft / transport aircraft
+! ash   = anti ship
+! ewa   = electronic warfare aircraft
+type=cas
+name=SU-25
+name_2locale=СУ-25
 
 ! Place here the amount of pylons the plane has. 
 pylon_amount=10
@@ -21,15 +31,15 @@ pylon_amount=10
 ! TV    = TV-quided rocket
 ! R     = Unquided rocket
 ! F     = Fuel tank
-pylon_1_contents    =AH,AR,AA
+pylon_1_contents    =AH
 
 ! If you want a ready made "preset" for the airplane
 ! place here the weapon you want it to carry.
-! The type must exist in \planes\armament\ folder
-pylon_1             =
+! The weapon must exist in \planes\armament\ folder.
+pylon_1             =r60m
 
-pylon_2             = 
-pylon_2_contents    = 
+pylon_2             =ptb_800 
+pylon_2_contents    =F
 
 pylon_3             = 
 pylon_3_contents    = 

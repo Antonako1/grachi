@@ -6,7 +6,19 @@
 // absolute path, pointing to exe's directory
 extern std::string project_root_path;
 
-// absolute path, pointing to: \assets\data\           ----
+// absolute path, points to %USERPROFILE%\Documents\grachi\         ---
+extern std::string project_in_home_docs;
+
+/*+++
+When on debug, these are prefixed with project_root_path.
+On release they are prefixed with project_in_home_docs
+---*/
+// absolute path, pointing to: \assets\data\            ---
 extern std::string atrc_path;
+// absolute path, pointing to \assets\images\           ---
+extern std::string image_path;
+// absolute path, pointing to \assets\audio\            ---
+extern std::string audio_path;
+
 
 #endif // MAIN_H

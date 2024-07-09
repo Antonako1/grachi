@@ -48,6 +48,8 @@ file(GLOB SOURCES
 "source/grachi.hpp"
 "source/msg.cpp"
 "source/msg.hpp"
+"source/mission_log.cpp"
+"source/mission_log.hpp"
 "source/styling.hpp"
 "source/vehicles/airplane.cpp"
 "source/vehicles/airplane.hpp"

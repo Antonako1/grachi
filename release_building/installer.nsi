@@ -19,7 +19,7 @@ DetailsButtonText "Show progress"
 ######### LICENSE ############
 PageEx license
     LicenseText "LICENSE"
-    LicenseData LICENSE
+    LicenseData "LICENSE.txt"
     LicenseForceSelection checkbox
 PageExEnd
 
@@ -80,8 +80,7 @@ CreateDirectory $INSTALL_DIR
 
 ; Files to install
 File "${PROJECTNAME}.exe"
-File "LICENSE"
-File "README.txt"
+File "LICENSE.txt"
 
 SectionEnd
 
@@ -108,7 +107,7 @@ Section "Uninstall"
 ; Remove installed files during uninstallation
 
 Delete "$INSTDIR\${PROJECTNAME}.exe"
-Delete "$INSTDIR\license"
+Delete "$INSTDIR\LICENSE.txt"
 
 ; Remove the installation directory if it still exists
 RMDir /r $INSTDIR

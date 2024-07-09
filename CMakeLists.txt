@@ -25,7 +25,9 @@ message(STATUS "Compiler version: ${CMAKE_C_COMPILER_VERSION}")
 
 # set(CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE "x64")
 
-set(DEBUG 1)
+if(USEDEBUG STREQUAL "1")
+  set(DEBUG 1)
+endif()
 message(STATUS "Debug status: ${DEBUG}")
 
 # Define the project name and languages
@@ -103,27 +105,27 @@ endif()
 
 # Link SFML libraries
 target_include_directories(${project_name} PRIVATE ${SFML_INCLUDE_DIR})
-# if(DEBUG)
-#   target_link_libraries(
-#     ${project_name} 
-#     PRIVATE 
-#     ${ATRC} 
-#     "${SFML_LIB_DIR}/sfml-system-d.lib" 
-#     "${SFML_LIB_DIR}/sfml-window-d.lib" 
-#     "${SFML_LIB_DIR}/sfml-graphics-d.lib" 
-#     "${SFML_LIB_DIR}/sfml-audio-d.lib"
-#   )
-# else()
-  # target_link_libraries(
-  #   ${project_name} 
-  #   PRIVATE 
-  #   ${ATRC} 
-  #   sfml-system
-  #   sfml-window
-  #   sfml-graphics
-  #   sfml-audio
-  #   )
-# endif()
+if(DEBUG)
+  target_link_libraries(
+    ${project_name} 
+    PRIVATE 
+    ${ATRC} 
+    "${SFML_LIB_DIR}/sfml-system-d.lib" 
+    "${SFML_LIB_DIR}/sfml-window-d.lib" 
+    "${SFML_LIB_DIR}/sfml-graphics-d.lib" 
+    "${SFML_LIB_DIR}/sfml-audio-d.lib"
+  )
+else()
+  target_link_libraries(
+    ${project_name} 
+    PRIVATE 
+    ${ATRC} 
+    sfml-system
+    sfml-window
+    sfml-graphics
+    sfml-audio
+    )
+endif()
 
-target_link_libraries(${project_name} sfml-system sfml-window sfml-graphics sfml-audio)
+# target_link_libraries(${project_name} sfml-system sfml-window sfml-graphics sfml-audio)
 message("STATUS" "CXX: ${CMAKE_CXX_FLAGS}")

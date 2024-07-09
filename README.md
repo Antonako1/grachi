@@ -6,7 +6,7 @@
     
 - ATRC's latest [release](https://github.com/Antonako1/ATRC/releases), used for data processing
     - Move the folder into the project's root and rename it into ```atrc```
-- SFML [2.6.1](https://www.sfml-dev.org/download/sfml/2.6.1/) 32-bit, used for the user interface
+- SFML [2.6.1](https://www.sfml-dev.org/download/sfml/2.6.1/) windows-vc17-32-bit, used for the user interface
     - Move the folder into project's root and rename it into ```sfml```
 
 ### Windows, Visual Studio:

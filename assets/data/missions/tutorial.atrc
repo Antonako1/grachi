@@ -1,0 +1,14 @@
+[mission_data]
+distance_to_fight_in_km=430
+
+[squadron]
+squadron_size=2
+
+[allies]
+infantry=5
+bmp
+btr
+
+
+[enemy]
+infantry=10

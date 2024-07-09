@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-
+set (CMAKE_CXX_STANDARD 17)
 # Ensure the project is supported on Windows
 if(NOT WIN32)
   message(FATAL_ERROR "Supported only for Windows")

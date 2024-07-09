@@ -1,95 +1,84 @@
-if(NOT WIN32) #remove?
+cmake_minimum_required(VERSION 3.8)
+
+# Ensure the project is supported on Windows
+if(NOT WIN32)
   message(FATAL_ERROR "Supported only for Windows")
 endif()
 
-cmake_minimum_required(VERSION 3.8)
-set(DEBUGGING__ 1)
+message(STATUS "For C++")
+message(STATUS "Compiler: ${CMAKE_CXX_COMPILER}")
+message(STATUS "Compiler target: ${CMAKE_CXX_COMPILER_TARGET}")
+message(STATUS "Compiler toolchain: ${CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN}")
+message(STATUS "Compiler id: ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS "Compiler loaded: ${CMAKE_CXX_COMPILER_LOADED}")
+message(STATUS "Compiler predefined commands: ${CMAKE_CXX_COMPILER_PREDEFINES_COMMAND}")
+message(STATUS "Compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
 
-# Enable Hot Reload for MSVC compilers if supported.
+message(STATUS "For C")
+message(STATUS "Compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "Compiler target: ${CMAKE_C_COMPILER_TARGET}")
+message(STATUS "Compiler toolchain: ${CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN}")
+message(STATUS "Compiler id: ${CMAKE_C_COMPILER_ID}")
+message(STATUS "Compiler loaded: ${CMAKE_C_COMPILER_LOADED}")
+message(STATUS "Compiler predefined commands: ${CMAKE_C_COMPILER_PREDEFINES_COMMAND}")
+message(STATUS "Compiler version: ${CMAKE_C_COMPILER_VERSION}")
+
+# set(CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE "x64")
+
+set(DEBUG 1)
+message(STATUS "Debug status: ${DEBUG}")
+
+# Define the project name and languages
+set(project_name grachi)
+project(${project_name} LANGUAGES C CXX)
+
+# Enable Hot Reload for MSVC compilers if supported
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-
-set(project_name "grachi")
-
-
-project(${project_name} LANGUAGES C CXX)
-
+# Set the paths to your source files
 file(GLOB SOURCES 
-"./source/*.c"
-"./source/*.h"
-"./source/*.cpp"
-"./source/*.hpp"
+"source/*.c"
+"source/*.h"
+"source/*.cpp"
+"source/*.hpp"
 )
 
-# Look for ATRC
+# Look for ATRC library
 if (WIN32)
-    set(ATRC_DIR "${ATRCBUILDCVPATH}/libs/win")
+  set(ATRC_DIR "${ATRCBUILDCVPATH}/libs/win")
 endif()
 find_library(ATRC NAMES ATRC REQUIRED PATHS ${ATRC_DIR})
 message(STATUS "ATRC library found at: ${ATRC}")
 include_directories("${ATRCBUILDCVPATH}/include")
 
-# Look for SFML
-message(STATUS "Path to SFML: ${SFMLBUILDCVPATH}")
-if (WIN32)
-  set(SFML_BIN_PATH "${SFMLBUILDCVPATH}/bin")
-  set(SFML_LIB_PATH "${SFMLBUILDCVPATH}/lib")
+# Look for SFML libraries
+set(SFML_DIR "${SFMLBUILDCVPATH}")
+set(SFML_LIB_DIR "${SFML_DIR}/lib")
+set(SFML_INCLUDE_DIR "${SFML_DIR}/include")
+list(APPEND CMAKE_PREFIX_PATH "${SFML_DIR}")
+
+find_package(SFML 2.6 COMPONENTS system window graphics audio REQUIRED)
+
+if(NOT SFML_FOUND)
+  MESSAGE(FATAL_ERROR "SFML not found")
 endif()
+# find_library(sfml-system sfml-window sfml-graphics sfml-audio)
 
-# Find the SFML libraries
-set(SFML_COMPONENTS system window graphics network audio)
-foreach(component ${SFML_COMPONENTS})
-  find_library(SFML_${component}_LIBRARY NAMES sfml-${component}-d sfml-${component} PATHS ${SFML_LIB_PATH} NO_DEFAULT_PATH)
-  if(SFML_${component}_LIBRARY)
-    message(STATUS "Found SFML ${component} library: ${SFML_${component}_LIBRARY}")
-    list(APPEND SFML_LIBRARIES ${SFML_${component}_LIBRARY})
-  else()
-    message(FATAL_ERROR "Could not find SFML ${component} library.")
-  endif()
-endforeach()
-
-# Include SFML directories
-include_directories("${SFMLBUILDCVPATH}/include")
-include_directories("${SFMLBUILDCVPATH}/include/SFML")
-message(STATUS "SFML header files at: ${SFMLBUILDCVPATH}/include/SFML")
-
-
-# Look for OpenCV
-message(STATUS "Path to OpenCV: ${OPENBUILDCVPATH}")
-if (WIN32)
-  set(OPENCV_DLL_PATH "${OPENBUILDCVPATH}/x64/vc16/bin")
-  set(OPENCV_LIB_PATH "${OPENBUILDCVPATH}/x64/vc16/lib")
-endif()
-# Find the monolithic OpenCV library
-find_library(OPENCV_WORLD_LIBRARY NAMES opencv_world4100d PATHS ${OPENCV_LIB_PATH} NO_DEFAULT_PATH)
-if(OPENCV_WORLD_LIBRARY)
-  message(STATUS "Found OpenCV world library: ${OPENCV_WORLD_LIBRARY}")
-  set(OPENCV_LIBRARIES ${OPENCV_WORLD_LIBRARY})
-else()
-  message(FATAL_ERROR "Could not find OpenCV world library.")
-endif()
-link_libraries(${OPENCV_LIBRARIES})
-# Include OpenCV directories
-include_directories("${OPENBUILDCVPATH}/include")
-include_directories("${OPENBUILDCVPATH}/include/opencv2")
-message(STATUS "OpenCV header files at: ${OPENBUILDCVPATH}/include/opencv2")
-
-# Add executable
+# Add the executable target
 add_executable(${project_name} ${SOURCES})
 
-# On errors, abort build
+
 # Compiler-specific options
-if (DEBUGGING__)
+if (DEBUG)
   if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(${project_name} PRIVATE /WX /ZI)
+    target_compile_options(${project_name} PRIVATE /WX /Zi)
   elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(${project_name} PRIVATE -Werror -g)
   endif()
   add_compile_definitions(DEBUG)
-  message("STATUS" "Added DEBUG flag")
 else()
   if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${project_name} PRIVATE /WX)
@@ -111,5 +100,30 @@ if (UNIX)
   set(CMAKE_INSTALL_RPATH "${ATRC_DIR}")
   set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
-message("STATUS" "CXX: ${CMAKE_CXX_FLAGS}")
 
+# Link SFML libraries
+target_include_directories(${project_name} PRIVATE ${SFML_INCLUDE_DIR})
+# if(DEBUG)
+#   target_link_libraries(
+#     ${project_name} 
+#     PRIVATE 
+#     ${ATRC} 
+#     "${SFML_LIB_DIR}/sfml-system-d.lib" 
+#     "${SFML_LIB_DIR}/sfml-window-d.lib" 
+#     "${SFML_LIB_DIR}/sfml-graphics-d.lib" 
+#     "${SFML_LIB_DIR}/sfml-audio-d.lib"
+#   )
+# else()
+  # target_link_libraries(
+  #   ${project_name} 
+  #   PRIVATE 
+  #   ${ATRC} 
+  #   sfml-system
+  #   sfml-window
+  #   sfml-graphics
+  #   sfml-audio
+  #   )
+# endif()
+
+target_link_libraries(${project_name} sfml-system sfml-window sfml-graphics sfml-audio)
+message("STATUS" "CXX: ${CMAKE_CXX_FLAGS}")

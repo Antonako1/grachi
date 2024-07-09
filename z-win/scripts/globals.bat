@@ -10,9 +10,9 @@ set "NINJAPATH=C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\COMMON7\I
 set "COMPILERPATH=cl.exe"
 set "PROJECTNAME=grachi"
 
-set "OPENBUILDCVPATH=%HOMEPATH%\Documents\Github\grachi\opencv"
-set "ATRCBUILDPATH=%HOMEPATH%\Documents\Github\grachi\atrc"
-set "SFMLBUILDPATH=%HOMEPATH%\Documents\Github\grachi\sfml"
+set "OPENBUILDCVPATH=%HOMEDRIVE%%HOMEPATH%\Documents\Github\grachi\opencv"
+set "ATRCBUILDPATH=%HOMEDRIVE%%HOMEPATH%\Documents\Github\grachi\atrc"
+set "SFMLBUILDPATH=%HOMEDRIVE%%HOMEPATH%\Documents\Github\grachi\sfml"
 
 
 ECHO Done.

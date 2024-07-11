@@ -7,6 +7,7 @@ enum fl_numbers {
     FL_GRACHI = 0,
     FL_ATRC_FD,
     FL_AMOUNT,
+    FL_AIRPLANE,
 };
 
 enum msg_numbers {

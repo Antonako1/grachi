@@ -9,6 +9,8 @@
 #include "./atrc_fd.hpp"
 #include <ATRC.h>
 
+#include "./vehicles/airplane.hpp"
+
 h1 s_h1;
 h2 s_h2;
 h3 s_h3;
@@ -39,6 +41,9 @@ std::string get_home_dir() {
 }
 
 int main(int argc, char const *argv[]){
+
+    
+
     #ifdef DEBUG
     m_dbg("Debug is enabled");
     #endif
@@ -47,16 +52,17 @@ int main(int argc, char const *argv[]){
     
     project_root_path = get_project_root_path();
     project_in_home_docs = get_home_dir() + "\\Documents\\grachi\\";
-    std::cout << project_in_home_docs << std::endl;
     
     #ifdef DEBUG
     atrc_path = project_root_path + "\\assets\\data\\";
     image_path = project_root_path + "\\assets\\images";
     audio_path = project_root_path + "\\assets\\audio\\";
+    std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
     #else
     atrc_path = project_in_home_docs + "\\assets\\data\\";
     image_path = project_in_home_docs + "\\assets\\images\\";
     audio_path = project_in_home_docs + "\\assets\\audio\\";
+    std::string fontPath = project_in_home_docs + "\\assets\\fonts\\clacon2.ttf";
     #endif
 
     // Initialize mission data only when starting it
@@ -68,7 +74,6 @@ int main(int argc, char const *argv[]){
 
     sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
     sf::Font font;
-    std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
     if (!font.loadFromFile(fontPath)) {
         m_nrm("Error loading the font", FONT_ERROR, FL_GRACHI, true);
     }
@@ -78,6 +83,12 @@ int main(int argc, char const *argv[]){
     // sf::String d_text;
     sf::Text text = sf::Text(str, font, s_p.f_sz);
     // text.setString(L"СУХОЙ 25");
+
+
+    Airplane test;
+    test.initialize_airplane("su25");
+    /*
+    
     while (window.isOpen())
     {
         // Process events
@@ -97,6 +108,6 @@ int main(int argc, char const *argv[]){
         // Update the window
         window.display();
     }
-
+    */
     return 0;
 }

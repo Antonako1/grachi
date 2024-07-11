@@ -11,7 +11,7 @@ enum main_states{
 };
 
 enum main_menu_states {
-    ms_initialize,
+    mms_initialize,
     mms_in_main_menu,
     mms_in_options,
     mms_start_new_game,

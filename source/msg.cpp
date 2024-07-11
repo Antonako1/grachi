@@ -19,9 +19,11 @@ void reset_colour() {
 }
 
 void m_dbg(std::string msg){
+    #ifdef DEBUG
     set_colour(1, 5);
     std::cout << "~~DEBUG MSG: '" << msg << "'" << std::endl;
     reset_colour();
+    #endif
 }
 
 void wm_dbg(std::wstring msg){

@@ -1,14 +1,93 @@
-на высоте:
-    без ПТБ: 640 км
-    с 2×ПТБ-800: 950 км
-    с 4×ПТБ-800: 1250 км
-у земли:
-    без ПТБ: 495 км
-    с 2×ПТБ-800: 620 км
-    с 4× ПТБ-800: 750 км
+! на высоте:
+!     без ПТБ: 640 км
+!     с 2×ПТБ-800: 950 км
+!     с 4×ПТБ-800: 1250 км
+! у земли:
+!     без ПТБ: 495 км
+!     с 2×ПТБ-800: 620 км
+!     с 4× ПТБ-800: 750 км
+! 
+! 
+! Основным топливом для двигателей является авиационный керосин. 
+! Двигатели обеспечивают топливом из 4 встроенных топливных баков (2 в фюзеляже, по одному в каждом из полукрыльев) с общим объёмом до 3 660 литров, 
+! также возможна подвеска до 2 подвесных топливных баков (ПТБ-800) ёмкости по 840 литров каждый[16]. 
+! Таким образом, общий объём топливных баков может составлять до 5 300 литров. 
 
 
-Основным топливом для двигателей является авиационный керосин. 
-Двигатели обеспечивают топливом из 4 встроенных топливных баков (2 в фюзеляже, по одному в каждом из полукрыльев) с общим объёмом до 3 660 литров, 
-также возможна подвеска до 2 подвесных топливных баков (ПТБ-800) ёмкости по 840 литров каждый[16]. 
-Таким образом, общий объём топливных баков может составлять до 5 300 литров. 
+
+[VEHICLE]
+! Types:
+! cas   = close air support / strike aircraft
+! fgh   = figher aircraft
+! bmb   = bomber aircraft
+! awa   = AWACS
+! het   = transport helicopter
+! hea   = attack helicopter
+! crg   = cargo aircraft / transport aircraft
+! ash   = anti ship
+! ewa   = electronic warfare aircraft
+type=cas
+name=SU-25
+name_2locale=СУ-25
+
+! Place here the amount of pylons the plane has. 
+pylon_amount=10
+
+! Make corresponding amount of pylon keys.
+! Here we have 10 pylons, 1 is the left-most pylon, 10 is the right-most pylon
+
+! Place here what the pylon is allowed to carry, seperate different types with a semicolon ';'
+! AH    = Air to Air Heat seeking missile
+! AR    = Air to Air Radar seeking missile
+! AA    = Air to Air Active radar seeking missile
+! LB    = Laser-quided Bomb
+! TB    = TV-quided Bomb
+! B     = Unquided Bomb
+! CB    = Cluster bomb
+! LR    = Laser-quided rocket
+! TV    = TV-quided rocket
+! R     = Unquided rocket
+! F     = Fuel tank
+! C     = COUNTERMEASURE_POD
+! G     = GUN_POD
+pylon_1_contents    =AH
+
+! If you want a ready made "preset" for the airplane
+! place here the weapon you want it to carry.
+! The weapon must exist in \planes\armament\ folder.
+pylon_1             =r60m
+
+pylon_2_contents    =B;LR;R;CB;C;
+pylon_2             =
+
+pylon_3_contents    = 
+pylon_3             = 
+
+pylon_4_contents    = 
+pylon_4             = 
+
+pylon_5_contents    = 
+pylon_5             = 
+
+pylon_6_contents    = 
+pylon_6             = 
+
+pylon_7_contents    = 
+pylon_7             = 
+
+pylon_8_contents    = 
+pylon_8             = 
+
+pylon_9_contents    = 
+pylon_9             = 
+
+pylon_10_contents   = 
+pylon_10            = 
+
+! How much fuel it can carry in full liters
+fuel=3660
+
+! Fuel consumption kg/kgf/hour in decimal
+fuel_consumption=1.28
+
+! How long of a distance it can travel with a full load

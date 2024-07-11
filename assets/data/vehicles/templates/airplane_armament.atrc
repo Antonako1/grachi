@@ -8,6 +8,7 @@
 ! AIR_TO_GROUND     | LB    = Laser-quided Bomb
 ! AIR_TO_GROUND     | TB    = TV-quided Bomb
 ! AIR_TO_GROUND     | B     = Unquided Bomb
+! AIR_TO_GROUND     | CB    = Cluster bomb
 ! AIR_TO_GROUND     | LR    = Laser-quided rocket
 ! AIR_TO_GROUND     | TV    = TV-quided rocket
 ! AIR_TO_GROUND     | R     = Unquided rocket

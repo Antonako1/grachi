@@ -19,7 +19,6 @@ size_t str_to_size_t(const std::string& str);
 
 // Lists seperated by ;
 // Example: pylon_contents=AA;B;R;
-// LIST MUST END IN ;
 std::vector<std::string> atrc_value_to_list(const std::string &value);
 
 // Points automatically to \\assets\\data\\. Just send the path from that point onwards...

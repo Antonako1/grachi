@@ -12,28 +12,28 @@ std::string airplane_quick_read(ATRCFiledata* fd, const std::string &key){
     return read_key_as_string(fd, "VEHICLE", key);
 }
 
-std::string pylon_carry_types[] = {
-    "AH",   std::to_string(pct_AH),
-    "AR",   std::to_string(pct_AR),
-    "AA",   std::to_string(pct_AA),
-    "LB",   std::to_string(pct_LB),
-    "TB",   std::to_string(pct_TB),
-    "B",    std::to_string(pct_B),
-    "CB",   std::to_string(pct_CB),
-    "LR",   std::to_string(pct_LR),
-    "TV",   std::to_string(pct_TV),
-    "R",    std::to_string(pct_R),
-    "F",    std::to_string(pct_F),
-    "C",    std::to_string(pct_C),
-    "G",    std::to_string(pct_G),
+const std::unordered_map<pylon_carry_types, std::string> pylon_carry_types_to_string = {
+    { pylon_carry_types::AH, "AH" },
+    { pylon_carry_types::AR, "AR" },
+    { pylon_carry_types::AA, "AA" },
+    { pylon_carry_types::LB, "LB" },
+    { pylon_carry_types::TB, "TB" },
+    { pylon_carry_types::B, "B" },
+    { pylon_carry_types::CB, "CB" },
+    { pylon_carry_types::LR, "LR" },
+    { pylon_carry_types::TR, "TR" },
+    { pylon_carry_types::R, "R" },
+    { pylon_carry_types::F, "F" },
+    { pylon_carry_types::C, "C" },
+    { pylon_carry_types::G, "G" }
 };
 
-std::vector<size_t> pylon_carry_types_to_size_t(const std::vector<std::string> &pylon_contents){
-    std::vector<size_t> res;
+std::vector<pylon_carry_types> pylon_carry_types_to_size_t(const std::vector<std::string> &pylon_contents){
+    std::vector<pylon_carry_types> res;
     for(const std::string &content : pylon_contents){
-        for(size_t i = 0; i < sizeof(pylon_carry_types) / sizeof(pylon_carry_types[0]); i+=2){
-            if(content == pylon_carry_types[i]){
-                res.push_back(str_to_size_t(pylon_carry_types[i+1]));
+        for(const auto &[key, value] : pylon_carry_types_to_string){
+            if(value == content){
+                res.push_back(key);
             }
         }
     }
@@ -50,31 +50,50 @@ void Pylon::initialize_pylon(ATRCFiledata *fd, size_t pylon_number){
     this->_carry_types = pylon_carry_types_to_size_t(pylon_contents);
 
     for(auto lol : this->_carry_types){
-        m_dbg(std::to_string(lol));
+        m_dbg(std::to_string((size_t)lol));
     }
+
+    // this->contents
 }
 
 
 
-std::string airplane_types[] = {
-    "cas", std::to_string(at_cas),
-    "fgh", std::to_string(at_fgh),
-    "bmb", std::to_string(at_bmb),
-    "awa", std::to_string(at_awa),
-    "het", std::to_string(at_het),
-    "hea", std::to_string(at_hea),
-    "crg", std::to_string(at_crg),
-    "ash", std::to_string(at_ash),
-    "ewa", std::to_string(at_ewa),
+const std::unordered_map<airplane_types, std::string> airplane_types_to_string = {
+    { airplane_types::cas, "cas" },
+    { airplane_types::fgh, "fgh" },
+    { airplane_types::bmb, "bmb" },
+    { airplane_types::awa, "awa" },
+    { airplane_types::het, "het" },
+    { airplane_types::hea, "hea" },
+    { airplane_types::crg, "crg" },
+    { airplane_types::ash, "ash" },
+    { airplane_types::ewa, "ewa" },
 };
 
-size_t airplane_type_to_enum(const std::string &type){
-    for(size_t i = 0; i < sizeof(airplane_types) / sizeof(airplane_types[0]); i+=2){
-        if(airplane_types[i] == type){
-            return str_to_size_t(airplane_types[i+1]);
+// std::string airplane_types[] = {
+//     "cas", std::to_string(airplane_types::cas),
+//     "fgh", std::to_string(airplane_types::fgh),
+//     "bmb", std::to_string(airplane_types::bmb),
+//     "awa", std::to_string(airplane_types::awa),
+//     "het", std::to_string(airplane_types::het),
+//     "hea", std::to_string(airplane_types::hea),
+//     "crg", std::to_string(airplane_types::crg),
+//     "ash", std::to_string(airplane_types::ash),
+//     "ewa", std::to_string(airplane_types::ewa),
+// };
+#include <iostream>
+airplane_types airplane_type_to_enum(const std::string &type){
+    for(const auto &[key, value] : airplane_types_to_string){
+        if(value == type){
+            return key;
         }
     }
-    return SIZE_MAX;
+    // for(size_t i = 0; i < sizeof(airplane_types) / sizeof(airplane_types[0]); i+=2){
+    //     if(airplane_types[i] == type){
+    //         return str_to_size_t(airplane_types[i+1]);
+    //     }
+    // }
+    return SIZE_MAX_AIRPLANE_TYPES;
 }
 #include <iostream>
 void Airplane::initialize_airplane(const std::string& airplane_name){
@@ -82,11 +101,11 @@ void Airplane::initialize_airplane(const std::string& airplane_name){
     
     std::unique_ptr<ATRCFiledata> fd = reader(atrc_file_path);
     this->_type = airplane_type_to_enum(airplane_quick_read(fd.get(), "type"));
-    if(this->_type == SIZE_MAX){
+    if(this->_type == SIZE_MAX_AIRPLANE_TYPES){
         m_nrm("Invalid airplane type in file " + atrc_file_path, DATA_VALUE_ERROR, FL_AIRPLANE, true);
         return;
     }
-    m_dbg("Type: " + std::to_string(this->_type));
+    m_dbg("Type: " + std::to_string((size_t)this->_type));
     this->_name = airplane_quick_read(fd.get(), "name");
     this->_name_2locale = airplane_quick_read(fd.get(), "name_2locale");
     m_dbg("Names: " + this->_name + " and " + this->_name_2locale);

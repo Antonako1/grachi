@@ -10,7 +10,7 @@
 ! AIR_TO_GROUND     | B     = Unquided Bomb
 ! AIR_TO_GROUND     | CB    = Cluster bomb
 ! AIR_TO_GROUND     | LR    = Laser-quided rocket
-! AIR_TO_GROUND     | TV    = TV-quided rocket
+! AIR_TO_GROUND     | TR    = TV-quided rocket
 ! AIR_TO_GROUND     | R     = Unquided rocket
 ! FUEL_TANK         | F     = Fuel tank
 ! COUNTERMEASURE_POD|C      = Countermeasure pod

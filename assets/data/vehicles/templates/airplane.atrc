@@ -13,6 +13,10 @@ type=cas
 name=SU-25
 name_2locale=СУ-25
 
+built_in_gun=true
+! needs to exist in vehicles\planes\armament\
+main_gun=gsh_30_2
+
 ! Place here the amount of pylons the plane has. 
 pylon_amount=10
 
@@ -70,7 +74,84 @@ pylon_10            =
 ! How much fuel it can carry in full liters
 fuel=3660
 
-! Fuel consumption kg/kgf/hour in decimal
+! Fuel consumption kg/kgf/hour in decimal for one engine
 fuel_consumption=1.28
 
-! How long of a distance it can travel with a full load
+! Maximum thrust of one engine in kgf
+max_thrust=4100
+
+! turbine inlet temperature of one engine in celsius
+engine_temperature=1005
+
+built_in_countermeasure_amount=256
+
+! airplane parts here
+engines=2
+
+are_fuel_tank_sealable=true
+amount_of_inner_fuel_tanks=4
+
+rudders_and_v_stabilizer_amount=1
+
+airbrakes=true
+
+drag_chute=true
+
+! every plane will have:
+! 2 h_stabilizers and elevators
+! 2 flaps, ailerons, slats and wings
+! fuselage
+! cockpit
+! navigation system and communication system
+
+! Radar warning receiver
+! 0 = Does not have an rwr
+! 1 = Only shows in front
+! 2 = Only shows in back
+! 3 = Shows in four equal areas around the airplane (sps-10)
+! 4 = Same but can differentiate locks and radar pings
+! 5 = Same as sps-11 in mig-29s, su-25s
+! 6 = Shows in all directions equally
+rwr=5
+
+! Radar
+does_have_radar=false
+! If the airplane has radar, uncomment the following
+! radar range in km
+! radar_range=
+
+! size of the radar sweep
+! radar_min_azimuth_scan=
+! radar_max_azimuth_scan=
+! radar_min_elevation_scan=
+! radar_max_elevation_scan=
+!
+! radar_full sweep speed in seconds
+! radar_full_sweep_in=
+!
+! track while scan. true or false
+! radar_tws=
+! radar_maximum_targets_in_tws
+! 
+! Other radar modes, place true or false:
+! radar_boresight=
+! radar_vertical_scan=
+
+
+! Infrared search and track / IRST
+does_have_irst=false
+! If the plane has irst, uncomment the following
+! size of the irst sweep
+! irst_min_azimuth_scan=
+! irst_max_azimuth_scan=
+! irst_min_elevation_scan=
+! irst_max_elevation_scan=
+!
+! Full sweep in seconds
+! irst_full_sweep_in=
+! IRST modes, place true or false 
+! irst_boresight=
+! irst_vertical_scan
+!
+! If the plane has a radar or irst, then this needs to be uncommented and assigned a value to (true or false)
+! helmet_mounted_display=

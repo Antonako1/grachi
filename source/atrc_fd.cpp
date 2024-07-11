@@ -69,7 +69,6 @@ void change_var_value(ATRCFiledata *fd, const std::string var_name, const std::s
     }
     ModifyVariable(fd, var_name, new_value);
 }
-#include <iostream>
 
 std::vector<std::string> atrc_value_to_list(const std::string &value){
     std::vector<std::string> res;
@@ -106,7 +105,7 @@ std::unique_ptr<ATRCFiledata> reader(const std::string& filename) {
     return temp;
 }
 
-
+// TODO: Remove?
 void initialize_asset_data(){
     m_dbg("initialize_asset_data() ATRC EMPTY!");
 }

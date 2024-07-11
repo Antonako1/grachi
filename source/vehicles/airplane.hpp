@@ -4,7 +4,14 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include <unordered_map>
+
+enum class armament_general_types{
+    AIR_TO_AIR,
+    AIR_TO_GROUND,
+    FUEL_TANK,
+    COUNTERMEASURE_POD,
+    GUN_POD,
+};
 
 enum class pylon_carry_types{
     AH = 0, // AH    = Air to Air Heat seeking missile
@@ -33,6 +40,13 @@ enum class armament_general_type{
     GUN_POD,
 };
 
+enum class armament_states{
+    in_use,
+    idle,
+    destroyed,
+    in_operational,
+};
+
 class Airplane_Armament{
 public:
     // Takes in the name of the armament.
@@ -40,10 +54,20 @@ public:
     void initialize_armament(std::string &armament_name);
 private:
     pylon_carry_types type; // takes in pylon_carry_type
+    armament_general_types general_type;
     armament_general_type general_type;
+    std::string name;
+    std::string name_2locale;
+    armament_states state;
 };
 
 
+enum class aircraft_pylon_state{
+    loaded,
+    armament_in_use,
+    empty,
+    in_operational,
+};
 
 class Pylon{
 public:
@@ -51,6 +75,7 @@ public:
 private:
     Airplane_Armament contents;
     std::vector<pylon_carry_types> _carry_types;
+    aircraft_pylon_state state;
 };
 
 /*+++
@@ -122,7 +147,7 @@ public:
     // Returns all the pylons
     const std::vector<Pylon>& get_pylons() const;
 
-    // Returns a specific pylon. Returns empty armament
+    // Returns a specific pylon. check out of bounds before calling
     const Pylon& get_pylon(size_t pylon_position) const;
 
 private:

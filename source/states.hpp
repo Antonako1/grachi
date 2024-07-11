@@ -5,24 +5,24 @@ extern int main_state;
 extern int main_menu_state;
 extern int game_state;
 
-enum main_states{
-    ms_in_main_menu,
-    ms_in_game,
+enum class main_states{
+    in_main_menu,
+    in_game,
 };
 
-enum main_menu_states {
-    mms_initialize,
-    mms_in_main_menu,
-    mms_in_options,
-    mms_start_new_game,
-    mms_load_game,
+enum class main_menu_states {
+    initialize,
+    in_main_menu,
+    in_options,
+    start_new_game,
+    load_game,
 };
 
-enum game_states{
-    gs_initialize,
-    gs_in_game,
-    gs_in_esc_menu,
-    gs_in_options
+enum class game_states{
+    initialize,
+    in_game,
+    in_esc_menu,
+    in_options
 };
 
 #endif // STATES_H

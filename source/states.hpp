@@ -1,10 +1,6 @@
 #ifndef STATES_H
 #define STATES_H
 
-extern int main_state;
-extern int main_menu_state;
-extern int game_state;
-
 enum class main_states{
     in_main_menu,
     in_game,
@@ -24,5 +20,10 @@ enum class game_states{
     in_esc_menu,
     in_options
 };
+
+extern main_states main_state;
+extern main_menu_states main_menu_state;
+extern game_states game_state;
+
 
 #endif // STATES_H

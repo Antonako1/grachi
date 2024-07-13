@@ -54,6 +54,14 @@ void m_nrm(std::string sMsg, int iMsg, int fl, bool fatal){
             func_generated = "Program tried accessing list from out of bounds";
             error_colouring = true;
             break;
+        case CAST_CONVERSION_ERROR:
+            func_generated = "Error cast converting values";
+            error_colouring = true;
+            break;
+        case MATH_ERROR:
+            func_generated = "Error with mathematical calculations";
+            error_colouring = true;
+            break;
         default:
         case UNKNOWN_MESSAGE:
             func_generated = "Unknown message";

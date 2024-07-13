@@ -49,11 +49,57 @@ std::string read_var_as_string(ATRCFiledata *fd, const std::string var_name){
     }
     return output;
 };
-
+#include <iostream>
 size_t str_to_size_t(const std::string& str){
     size_t res;
-    res = std::stoi(str);
+    try {
+        res = std::stoi(str);
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
+        m_nrm("Error converting '" + str + "' to size_t", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Out of range: " << e.what() << std::endl;
+        m_nrm("Error converting '" + str + "' to size_t", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+    }
     return res;
+}
+double str_to_double(const std::string& str){
+    double res;
+    size_t pos;
+    try {
+        res = std::stod(str, &pos);
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
+        m_nrm("Error converting '" + str + "' to double", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Out of range: " << e.what() << std::endl;
+        m_nrm("Error converting '" + str + "' to double", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+    }
+    if(pos != str.length()){
+        m_nrm("Error converting '" + str + "' to double", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+    }
+    return res;
+}
+
+std::string str_to_lower(const std::string &str){
+    std::string res=str;
+    for(char &c : res){
+        std::tolower(c);
+    }
+    return res;
+}
+
+bool str_to_bool(const std::string &str){
+    std::string temp=str_to_lower(str);
+    trim(temp);
+    if(temp == "true") {
+        return true;
+    } else if(temp == "false"){
+        return false;
+    } else {
+        m_nrm("Error converting string to a boolean. Input: '" + str+"' Output: '" +temp+"'", CAST_CONVERSION_ERROR, FL_ATRC_FD, true);
+        return false;
+    }
 }
 
 void change_key_value(ATRCFiledata *fd, const std::string block, const std::string key, const std::string new_value){

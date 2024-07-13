@@ -18,6 +18,8 @@ enum msg_numbers {
     DATA_VALUE_ERROR,
     ERROR_AMOUNT,
     LIST_OUT_OF_BOUNDS_ERROR,
+    CAST_CONVERSION_ERROR,
+    MATH_ERROR,
 };
 
 void m_nrm(std::string sMsg, int iMsg, int fl, bool fatal);

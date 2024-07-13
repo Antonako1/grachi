@@ -1,0 +1,53 @@
+! Предельный угол атаки, предельная перегрузка - Critical angle of attack, critical G-load
+! Управляй в ручную - Control manually
+! Отказ систем РЭБ - ECM systems failure
+! Отказ гидросистемы - Hydraulic system failure
+! Отказ ОЛС - Optical locator system failure
+! Отказ СПО - SPO (radar warning system) failure
+! Отказ РЛС - Radar failure
+! Отказ систем, смотри экран - Systems failure, check the screen
+! Пожар правого двигателя - Right engine fire
+! Пожар левого двигателя - Left engine fire
+! Опасная вибрация левого двигателя - Dangerous vibration in the left engine
+! Опасная вибрация правого двигателя - Dangerous vibration in the right engine
+! Скорость предельная - Maximum speed
+! Сбрось обороты - Decrease throttle
+! Увеличь обороты - Increase throttle
+! Катапультируйся - Eject
+!
+! "Отказ системы" - "System failure"
+! "Пожар правого двигателя" - "Right engine fire"
+! "Пожар левого двигателя" - "Left engine fire"
+! "Опасная вибрация правого двигателя" - "Dangerous vibration in the right engine"
+! "Опасная вибрация левого двигателя" - "Dangerous vibration in the left engine"
+! "Скорость предельная" - "Maximum speed"
+! "Гидросистема отказ" - "Hydraulic system failure"
+! "Отказ ОЛС" - "OLS failure" (Optical Locator System)
+! "Отказ СПО" - "SPO failure" (Radar Warning System)
+! "Отказ РЛС" - "Radar failure"
+! "Отказ систем, смотри экран" - "System failure, check the screen"
+! "Проверь систему" - "Check the system"
+! "Снизь обороты" - "Reduce throttle"
+! "Увеличь обороты" - "Increase throttle"
+! "Высота малая" - "Low altitude"
+! "Высота большая" - "High altitude"
+! "Управляй вручную" - "Control manually"
+! "Катапультируйся" - "Eject"
+! "Пуск ракеты" - "Missile launch"
+! "Определи направление угрозы" - "Determine the threat direction"
+! 
+!  CONTINUE
+! "Проверь обороты двигателя" - "Check engine RPM" 
+! "Давление масла низкое" - "Low oil pressure"
+! "Температура высокая" - "High temperature"
+! "Кислород низкий" - "Low oxygen"
+! "Проверь топливо" - "Check fuel"
+! "Низкий уровень топлива" - "Low fuel level"
+! "Закрылки выпущены" - "Flaps extended"
+! "Закрылки убраны" - "Flaps retracted"
+! "Шасси выпущены" - "Landing gear extended"
+! "Шасси убраны" - "Landing gear retracted"
+! "Закрылки не убраны" - "Flaps not retracted"
+! "Шасси не убраны" - "Landing gear not retracted"
+! "Закрылки не выпущены" - "Flaps not extended"
+! "Шасси не выпущены" - "Landing gear not extended"

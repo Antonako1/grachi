@@ -2,12 +2,13 @@
 #include <windows.h>
 #include <sfml/Window.hpp>
 #include <sfml/Graphics.hpp>
-#include <sfml/System.hpp>
+#include <ATRC.h>
 #include "./grachi.hpp"
+#include "./states.hpp"
+#include "./screens/screens.hpp"
 #include "./msg.hpp"
 #include "./styling.hpp"
 #include "./atrc_fd.hpp"
-#include <ATRC.h>
 
 #include "./vehicles/airplane.hpp"
 
@@ -20,6 +21,14 @@ std::string project_in_home_docs;
 std::string atrc_path;
 std::string image_path;
 std::string audio_path;
+
+main_states main_state;
+main_menu_states main_menu_state;
+game_states game_state;
+
+
+sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
+sf::Font font;
 
 std::string get_project_root_path() {
     char path[MAX_PATH];
@@ -41,73 +50,44 @@ std::string get_home_dir() {
 }
 
 int main(int argc, char const *argv[]){
-
-    
-
     #ifdef DEBUG
     m_dbg("Debug is enabled");
     #endif
-
     m_nrm("Starting program", PROGRAM_INFO, FL_GRACHI, false);
-    
     project_root_path = get_project_root_path();
     project_in_home_docs = get_home_dir() + "\\Documents\\grachi\\";
-    
-    #ifdef DEBUG
+#ifdef DEBUG
     atrc_path = project_root_path + "\\assets\\data\\";
     image_path = project_root_path + "\\assets\\images";
     audio_path = project_root_path + "\\assets\\audio\\";
     std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
-    #else
+#else
     atrc_path = project_in_home_docs + "\\assets\\data\\";
     image_path = project_in_home_docs + "\\assets\\images\\";
     audio_path = project_in_home_docs + "\\assets\\audio\\";
     std::string fontPath = project_in_home_docs + "\\assets\\fonts\\clacon2.ttf";
-    #endif
+#endif
 
-    // Initialize mission data only when starting it
-    // initialize_asset_data();
-    
-    // std::cout << read_key_as_string(fd_su25.get(), "vehicle", "pylon_amount") << std::endl;
-    // change_key_value(fd_su25.get(), "vehicle", "pylon_amount", "1");
-    // std::cout << read_key_as_string(fd_su25.get(), "vehicle", "pylon_amount") << std::endl;
-
-    sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
-    sf::Font font;
     if (!font.loadFromFile(fontPath)) {
         m_nrm("Error loading the font", FONT_ERROR, FL_GRACHI, true);
     }
-    std::string str="Русский текст тут абв!";
-    m_dbg(str);
-    
-    // sf::String d_text;
-    sf::Text text = sf::Text(str, font, s_p.f_sz);
-    // text.setString(L"СУХОЙ 25");
-
-
     Airplane test;
     test.initialize_airplane("su25");
-    /*
-    
-    while (window.isOpen())
-    {
-        // Process events
-        sf::Event event;
-        while (window.pollEvent(event)){
-            // Close window: exit
-            if (event.type == sf::Event::Closed)
-                window.close();
+
+    main_state = main_states::in_main_menu;
+    main_menu_state = main_menu_states::initialize;
+    game_state = game_states::initialize;
+
+    while (window.isOpen()){
+
+        switch (main_state) {
+            case main_states::in_game:
+                break;
+            case main_states::in_main_menu:
+                main_menu_main_loop();
+                break;
         }
- 
-        // Clear screen
-        window.clear();
-
-        // Draw the string
-        window.draw(text);
-
-        // Update the window
-        window.display();
     }
-    */
+    
     return 0;
 }

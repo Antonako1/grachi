@@ -3,9 +3,11 @@
 
 struct style_element {
     unsigned int size;
+    float border_thickness;
     style_element(
-        unsigned int sz
-    ) : size(sz) {}
+        unsigned int sz,
+        float bw
+    ) : size(sz), border_thickness(bw) {}
 };
 
 extern style_element h1;
@@ -29,7 +31,7 @@ struct colour_preset {
     sf::Color opposite_text;
     sf::Color opposite_background;
     sf::Color opposite_border;
-
+    colour_preset(){}
     colour_preset(
         sf::Color t = sf::Color(),
         sf::Color bg = sf::Color(),

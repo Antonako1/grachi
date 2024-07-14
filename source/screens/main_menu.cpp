@@ -10,14 +10,9 @@ Main_Menu main_menu;
 
 void Main_Menu::initialize(){
     // Start
-    float rectLeft = 100;
-    float rectTop = 100;
-    float rectWidth = 300;
-    float rectHeight = 100;
-    sf::Rect<float> rect(rectLeft, rectTop, rectWidth, rectHeight);
     std::unique_ptr<ATRCFiledata> fd = reader("locale\\main_menu.atrc");
     std::string buffer = read_key_as_string(fd.get(), "MAIN_MENU", "start_button"); 
-    button temp_button = button(100, 100, rect, gbw_preset, buffer, h3);
+    button temp_button(100, 100, gbw_preset, buffer, h3);
     this->buttons.push_back(temp_button);
     // Continue
     // Load

@@ -1,22 +1,59 @@
 #include "./button.hpp"
 
+#include "../../msg.hpp"
+#ifdef DEBUG
+# include <iostream>
+#endif
+
+bool button::button_overflow_works(){
+    this->temp_pointer--;
+    this->text_block.setString(this->text.substr(0, (size_t)this->temp_pointer));
+    this->text_block.setOrigin(this->text_block.getGlobalBounds().getSize() / 2.f + this->text_block.getLocalBounds().getPosition());
+    this->text_block.setPosition((sf::Vector2f)(this->rect.getPosition() + this->rect.getSize() / 2));
+    return check_text_clipping(this->text_block, this->draw_rectangle);
+}
+
 button::button
 ( 
-    size_t x, 
-    size_t y,
-    sf::Rect<float> rect,
+    int x, 
+    int y,
     colour_preset colours,
     std::string txt,
     style_element stl
 )
-    : x(x), y(y), rect(rect), colours(colours), text(txt), style(stl)
-{
+    : x(x), y(y), colours(colours), text(txt), style(stl)
+{   
+    this->rect = sf::Rect<int>(this->x, this->y, this->min_width, this->min_height);
     this->text_block = sf::Text(this->text, font, this->style.size);
+
+    sf::Vector2f og_origin = this->text_block.getOrigin();
+    sf::Vector2f og_pos = this->text_block.getPosition();
+
+    this->text_block.setOrigin(this->text_block.getGlobalBounds().getSize() / 2.f + this->text_block.getLocalBounds().getPosition());
+    this->text_block.setPosition((sf::Vector2f)(this->rect.getPosition() + this->rect.getSize() / 2));
+
+    this->draw_rectangle.setOutlineThickness(this->style.border_thickness);
     construct_draw_rectangle();
-    this->text_block.setPosition(this->draw_rectangle.getPosition());
+
+    if(check_text_clipping(this->text_block, this->draw_rectangle)){
+        this->is_text_clipping = true;
+        // std::tuple<float,float> res = get_lr_overflow(this->text_block, this->draw_rectangle);
+        // float overflow_left = std::get<0>(res);
+        // float overflow_right = std::get<1>(res);
+        // std::cout << "OWL: " << overflow_left << std::endl;
+        // std::cout << "OWR: " << overflow_right << std::endl;
+        this->temp_pointer = this->text.size();
+        while(this->button_overflow_works());
+        this->abs_overflow = this->text.size() - this->temp_pointer + 1;
+        // std::cout << this->abs_overflow << std::endl;
+        // std::cout << this->text.size() << std::endl;
+        this->text_block.setString(this->text.substr(0, this->text.size() - this->abs_overflow));
+        this->text_block.setOrigin(this->text_block.getGlobalBounds().getSize() / 2.f + this->text_block.getLocalBounds().getPosition());
+        this->text_block.setPosition((sf::Vector2f)(this->rect.getPosition() + this->rect.getSize() / 2));
+    }
+    
 }
 
-#include "../../msg.hpp"
 void button::draw(mouse ms){
     if(this->hover_on(ms.pos)){
         this->draw_rectangle.setFillColor(this->colours.background);
@@ -27,15 +64,20 @@ void button::draw(mouse ms){
         this->draw_rectangle.setOutlineColor(this->colours.opposite_border);
         this->text_block.setFillColor(this->colours.opposite_text);
     }
+
+    if(this->is_text_clipping){
+        rotating_text_button(*this);
+    }
+
     window.draw(this->draw_rectangle);
     window.draw(this->text_block);
 }
 bool button::hover_on(sf::Vector2i ms){
-    bool res = this->rect.contains((sf::Vector2f)ms);
+    bool res = this->rect.contains(ms);
     return !res;
 }
 
 void button::construct_draw_rectangle(){
-    draw_rectangle.setSize(sf::Vector2f(rect.width, rect.height));
-    draw_rectangle.setPosition(sf::Vector2f(rect.left, rect.top));
+    draw_rectangle.setSize((sf::Vector2f)this->rect.getSize());
+    draw_rectangle.setPosition((sf::Vector2f)this->rect.getPosition());
 }

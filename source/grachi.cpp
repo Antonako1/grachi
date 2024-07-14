@@ -21,7 +21,8 @@ main_states main_state;
 main_menu_states main_menu_state;
 game_states game_state;
 
-
+float dt;
+sf::Time sec;
 sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
 sf::Font font;
 
@@ -73,8 +74,11 @@ int main(int argc, char const *argv[]){
     main_menu_state = main_menu_states::initialize;
     game_state = game_states::initialize;
 
+    sf::Clock deltaClock = sf::Clock();
+    sf::Clock other_clock = sf::Clock();
     while (window.isOpen()){
-
+        float dt = deltaClock.restart().asSeconds();
+        sec = other_clock.getElapsedTime();
         switch (main_state) {
             case main_states::in_game:
                 break;

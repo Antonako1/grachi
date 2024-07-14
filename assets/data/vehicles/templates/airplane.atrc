@@ -83,7 +83,7 @@ max_takeoff_weight=19300
 ! How much fuel it can carry in full liters without external fuel tanks
 fuel=3660
 
-! How much fuel engine consumes in kg/h in decimal
+! Fuel consumption kg/kgf/hour in decimal for one engine
 fuel_consumption_rate=5248
 
 ! Maximum thrust of one engine in kgf
@@ -101,6 +101,8 @@ built_in_laser_pod=true
 built_in_tv_pod=false
 
 ! airplane parts here
+
+! 1, 2 or 4 engines
 engines=2
 
 engine_fire_extinguishers=true
@@ -121,7 +123,7 @@ drag_chute_min_deployment_speed=280
 
 ejection_seat=true
 
-ballistics_computer_main_gun=true
+ballistics_computer_guns=true
 ballistics_computer_rockets=true
 ballistics_computer_bombs=true
 
@@ -136,9 +138,9 @@ ballistics_computer_bombs=true
 ! 0 = Does not have an rwr
 ! 1 = Only shows in front
 ! 2 = Only shows in back
-! 3 = Shows in four equal areas around the airplane (sps-10)
+! 3 = Shows in four equal areas around the airplane (spo-10)
 ! 4 = Same but can differentiate locks and radar pings
-! 5 = Same as sps-15 in mig-29s, su-25s
+! 5 = Same as spo-15 in mig-29s, su-25s
 ! 6 = Shows in all directions equally
 rwr=5
 
@@ -178,8 +180,6 @@ does_have_irst=false
 ! irst_min_elevation_scan=
 ! irst_max_elevation_scan=
 !
-! value of 0-100
-! irst_camera_sensitivity=
 ! Full sweep in seconds
 ! irst_full_sweep_in=
 ! IRST modes, place true or false 

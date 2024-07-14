@@ -20,5 +20,11 @@ extern std::string image_path;
 // absolute path, pointing to \assets\audio\            ---
 extern std::string audio_path;
 
+// delta time in seconds
+extern float dt;
+
+#include <sfml/System/Time.hpp>
+// Current program uptime in seconds
+extern sf::Time sec;
 
 #endif // MAIN_H

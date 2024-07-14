@@ -1,8 +1,10 @@
 #include "./styling.hpp"
-style_element h1(64);
-style_element h2(48);
-style_element h3(36);
-style_element p(24);
+#define UNIVERSAL_BORDER_WIDTH      2
+
+style_element h1(64, UNIVERSAL_BORDER_WIDTH);
+style_element h2(48, UNIVERSAL_BORDER_WIDTH);
+style_element h3(36, UNIVERSAL_BORDER_WIDTH);
+style_element p (24, UNIVERSAL_BORDER_WIDTH);
 _colours colours;
 
 colour_preset gbw_preset(

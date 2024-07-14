@@ -1,214 +1,39 @@
-! на высоте:
-!     без ПТБ: 640 км
-!     с 2×ПТБ-800: 950 км
-!     с 4×ПТБ-800: 1250 км
-! у земли:
-!     без ПТБ: 495 км
-!     с 2×ПТБ-800: 620 км
-!     с 4× ПТБ-800: 750 км
-! 
-! 
-! Основным топливом для двигателей является авиационный керосин. 
-! Двигатели обеспечивают топливом из 4 встроенных топливных баков (2 в фюзеляже, по одному в каждом из полукрыльев) с общим объёмом до 3 660 литров, 
-! также возможна подвеска до 2 подвесных топливных баков (ПТБ-800) ёмкости по 840 литров каждый[16]. 
-! Таким образом, общий объём топливных баков может составлять до 5 300 литров. 
-
-
-
-[VEHICLE]
-! Types:
-! cas   = close air support / strike aircraft
-! fgh   = figher aircraft
-! bmb   = bomber aircraft
-! awa   = AWACS
-! het   = transport helicopter
-! hea   = attack helicopter
-! crg   = cargo aircraft / transport aircraft
-! ash   = anti ship
-! ewa   = electronic warfare aircraft
-type=cas
-name=SU-25
-name_2locale=СУ-25
-
-built_in_gun=true
-! needs to exist in vehicles\planes\armament\
-main_gun=gsh_30_2
-
-! Whatever count is set in the armament file will be replaced by this
-main_gun_ammo_count=250
-
-! Place here the amount of pylons the plane has. 
-pylon_amount=10
-
-! Make corresponding amount of pylon keys.
-! Here we have 10 pylons, 1 is the left-most pylon, 10 is the right-most pylon
-
-! Place here what the pylon is allowed to carry, seperate different types with a semicolon ';'
-! AH    = Air to Air Heat seeking missile
-! AR    = Air to Air Radar seeking missile
-! AA    = Air to Air Active radar seeking missile
-! LB    = Laser-quided Bomb
-! TB    = TV-quided Bomb
-! B     = Unquided Bomb
-! CB    = Cluster bomb
-! LR    = Laser-quided rocket
-! TR    = TV-quided rocket
-! R     = Unquided rocket
-! F     = Fuel tank
-! C     = COUNTERMEASURE_POD
-! G     = GUN_POD
-! TP    = Targeting pod
-pylon_1_contents    =AH
-
-! If you want a ready made "preset" for the airplane
-! place here the weapon you want it to carry.
-! The weapon must exist in \planes\armament\ folder.
-pylon_1             =r60m
-
-pylon_2_contents    =B;LR;R;CB;C;
-pylon_2             =
-
-pylon_3_contents    = 
-pylon_3             = 
-
-pylon_4_contents    = 
-pylon_4             = 
-
-pylon_5_contents    = 
-pylon_5             = 
-
-pylon_6_contents    = 
-pylon_6             = 
-
-pylon_7_contents    = 
-pylon_7             = 
-
-pylon_8_contents    = 
-pylon_8             = 
-
-pylon_9_contents    = 
-pylon_9             = 
-
-pylon_10_contents   = 
-pylon_10            = 
-
-! Plane's empty weight in kilograms
-empty_weight=9800
-! max takeoff weight in kilograms
-max_takeoff_weight=19300
-
-! How much fuel it can carry in full liters without external fuel tanks
-fuel=3660
-
-! Fuel consumption kg/kgf/hour in decimal for one engine
-fuel_consumption_rate=5248
-
-! Maximum thrust of one engine in kgf
-max_thrust=4100
-
-! turbine inlet temperature of one engine in celsius
-engine_temperature=1005
-
-built_in_countermeasure_count=256
-
-built_in_ircm=false
-built_in_ecm=false
-
-built_in_laser_pod=true
-built_in_tv_pod=false
-
-! airplane parts here
-
-! 1, 2 or 4 engines
-engines=2
-
-engine_fire_extinguishers=true
-
-are_fuel_tank_sealable=true
-amount_of_inner_fuel_tanks=4
-
-! set 1 or 2
-rudders_and_v_stabilizer_amount=1
-
-airbrakes=true
-
-are_flaps_fixed=false
-
-drag_chute=true
-! in kmh
-drag_chute_min_deployment_speed=280
-
-ejection_seat=true
-
-ballistics_computer_guns=true
-ballistics_computer_rockets=true
-ballistics_computer_bombs=true
-
-! every plane will have:
-! 2 h_stabilizers and elevators
-! 2 flaps, ailerons, slats and wings
-! fuselage
-! cockpit
-! navigation system and communication system
-
-! Radar warning receiver
-! 0 = Does not have an rwr
-! 1 = Only shows in front
-! 2 = Only shows in back
-! 3 = Shows in four equal areas around the airplane (sps-10)
-! 4 = Same but can differentiate locks and radar pings
-! 5 = Same as sps-15 in mig-29s, su-25s
-! 6 = Shows in all directions equally
-rwr=5
-
-! Radar
-does_have_radar=false
-! If the airplane has radar, uncomment the following
-! radar range in km
-! radar_range=
-
-! place true or false
-! is_radar_pulse_doplar=
-
-! size of the radar sweep in degrees
-! radar_min_azimuth_scan=
-! radar_max_azimuth_scan=
-! radar_min_elevation_scan=
-! radar_max_elevation_scan=
-!
-! radar_full sweep speed in seconds
-! radar_full_sweep_in=
-!
-! track while scan. true or false
-! radar_tws=
-! radar_maximum_targets_in_tws=
-! 
-! Other radar modes, place true or false:
-! radar_boresight=
-! radar_vertical_scan=
-
-
-! Infrared search and track / IRST
-does_have_irst=false
-! If the plane has irst, uncomment the following
-! size of the irst sweep
-! irst_min_azimuth_scan=
-! irst_max_azimuth_scan=
-! irst_min_elevation_scan=
-! irst_max_elevation_scan=
-!
-! Full sweep in seconds
-! irst_full_sweep_in=
-! IRST modes, place true or false 
-! irst_boresight=
-! irst_vertical_scan
-!
-! If the plane has a radar or irst, then this needs to be uncommented and assigned a value to (true or false)
-! helmet_mounted_display=
-
-does_plane_have_voice_warning_system=false
-! If it has a vws, point a correct preset to it
-! voice_warning_system=ri_65
-
-! in m^2
-radar_cross_section=9
+[ARMAMENT]
+! Place here the armament type
+! GENERAL_TYPE      | Type
+! ===================
+! AIR_TO_AIR        | AH    = Air to Air Heat seeking missile
+! AIR_TO_AIR        | AR    = Air to Air Radar seeking missile
+! AIR_TO_AIR        | AA    = Air to Air Active radar seeking missile
+! AIR_TO_GROUND     | LB    = Laser-quided Bomb
+! AIR_TO_GROUND     | TB    = TV-quided Bomb
+! AIR_TO_GROUND     | B     = Unquided Bomb
+! AIR_TO_GROUND     | CB    = Cluster bomb
+! AIR_TO_GROUND     | LR    = Laser-quided rocket
+! AIR_TO_GROUND     | TR    = TV-quided rocket
+! AIR_TO_GROUND     | R     = Unquided rocket
+! FUEL_TANK         | F     = Fuel tank
+! COUNTERMEASURE_POD|C      = Countermeasure pod
+! GUN_POD           | G     = Gunpod
+type=B
+! Place here the general type of the armament
+general_type=AIR_TO_GROUND
+! Name of the armament. Will be displayed in the game
+name=bomb
+! Name in second locale. Will be displayed in the game
+name_2locale=бомба
+! If the armament is an air to air weapon, delete every block and their contents
+! except this one
+[AIR_TO_AIR]
+! If the armament is an air to ground weapon, delete every block and their contents
+! except this one
+[AIR_TO_GROUND]
+! If the armament is a fuel tank, delete every block and their contents
+! except this one
+[FUEL_TANK]
+! If the armament is a Countermeasure pod, delete every block and their contents
+! except this one
+[COUNTERMEASURE_POD]
+! If the armament is a gun pod, delete every block and their contents
+! except this one
+[GUN_POD]

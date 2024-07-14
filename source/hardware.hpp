@@ -1,9 +1,10 @@
 #ifndef HARDWARE_H
 #define HARDWARE_H
 
+#include <sfml/System/Vector2.hpp>
+
 struct mouse {
-    size_t x = 0;
-    size_t y = 0;
+    sf::Vector2i pos;
     bool ms_1_down = false;
     bool ms_2_down = false;
     bool ms_3_down = false;

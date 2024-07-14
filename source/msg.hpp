@@ -8,6 +8,7 @@ enum fl_numbers {
     FL_ATRC_FD,
     FL_AMOUNT,
     FL_AIRPLANE,
+    FL_MAIN_MENU
 };
 
 enum msg_numbers {

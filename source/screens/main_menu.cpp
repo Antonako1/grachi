@@ -1,11 +1,30 @@
 #include "./screens.hpp"
 #include "../states.hpp"
 #include "../msg.hpp"
+#include "../atrc_fd.hpp"
+#include "./main_menu_class.hpp"
 
 Main_Menu main_menu;
 
-void Main_Menu::initialize(){
 
+
+void Main_Menu::initialize(){
+    // Start
+    float rectLeft = 100;
+    float rectTop = 100;
+    float rectWidth = 300;
+    float rectHeight = 100;
+    sf::Rect<float> rect(rectLeft, rectTop, rectWidth, rectHeight);
+    std::unique_ptr<ATRCFiledata> fd = reader("locale\\main_menu.atrc");
+    std::string buffer = read_key_as_string(fd.get(), "MAIN_MENU", "start_button"); 
+    button temp_button = button(100, 100, rect, gbw_preset, buffer, h3);
+    this->buttons.push_back(temp_button);
+    // Continue
+    // Load
+    // Gallery
+    // Logs
+    // Options
+    // Exit to windows
 }
 
 void Main_Menu::events(){
@@ -18,12 +37,19 @@ void Main_Menu::events(){
             case sf::Event::MouseButtonPressed:
             case sf::Event::MouseButtonReleased:
                 break;
+            case sf::Event::MouseMoved:
+                this->ms.pos.x = event.mouseMove.x;
+                this->ms.pos.y = event.mouseMove.y;
+                break;
         }
     }
 }
 
 void Main_Menu::draw_main_menu(){
     window.clear();
+    for(auto &btn : this->buttons){
+        btn.draw(this->ms);
+    }
     window.display();
 }
 
@@ -36,10 +62,10 @@ void Main_Menu::draw_option_overlay(){
 void main_menu_main_loop(){
     switch(main_menu_state){
         case main_menu_states::initialize: 
-            m_dbg("Initializing main menu");
+            main_menu = Main_Menu();
+            m_nrm("Initializing main menu", PROGRAM_INFO, FL_MAIN_MENU, false);
             main_menu.initialize();
             main_menu_state = main_menu_states::in_main_menu;
-            m_dbg("Showing main menu");
             break;
         case main_menu_states::in_main_menu: 
             main_menu.events();

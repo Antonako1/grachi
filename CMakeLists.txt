@@ -42,25 +42,14 @@ endif()
 
 # Set the paths to your source files
 file(GLOB SOURCES 
-"source/atrc_fd.cpp"
-"source/atrc_fd.hpp"
-"source/grachi.cpp"
-"source/grachi.hpp"
-"source/msg.cpp"
-"source/msg.hpp"
-"source/hardware.hpp"
-"source/screens/game.cpp"
-"source/screens/main_menu.cpp"
-"source/screens/main_menu_class.cpp"
-"source/screens/screens.cpp"
-"source/mission_log.cpp"
-"source/map_manipulation.cpp"
-"source/mission_log.hpp"
-"source/styling.hpp"
-"source/vehicles/airplane.cpp"
-"source/vehicles/airplane.hpp"
-"source/vehicles/ground_vehicle.hpp"
-"source/vehicles/ground_vehicle.hpp"
+"source/*.cpp"
+"source/*.hpp"
+"source/screens/*.cpp"
+"source/screens/*.hpp"
+"source/screens/components/*.cpp"
+"source/screens/components/*.hpp"
+"source/vehicles/*.cpp"
+"source/vehicles/*.hpp"
 )
 
 # Look for ATRC library

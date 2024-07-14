@@ -11,11 +11,6 @@
 #include "./atrc_fd.hpp"
 
 #include "./vehicles/airplane.hpp"
-
-h1 s_h1;
-h2 s_h2;
-h3 s_h3;
-p  s_p;
 std::string project_root_path;
 std::string project_in_home_docs;
 std::string atrc_path;

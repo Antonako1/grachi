@@ -26,9 +26,6 @@ button::button
     this->rect = sf::Rect<int>(this->x, this->y, this->min_width, this->min_height);
     this->text_block = sf::Text(this->text, font, this->style.size);
 
-    sf::Vector2f og_origin = this->text_block.getOrigin();
-    sf::Vector2f og_pos = this->text_block.getPosition();
-
     this->text_block.setOrigin(this->text_block.getGlobalBounds().getSize() / 2.f + this->text_block.getLocalBounds().getPosition());
     this->text_block.setPosition((sf::Vector2f)(this->rect.getPosition() + this->rect.getSize() / 2));
 
@@ -37,16 +34,9 @@ button::button
 
     if(check_text_clipping(this->text_block, this->draw_rectangle)){
         this->is_text_clipping = true;
-        // std::tuple<float,float> res = get_lr_overflow(this->text_block, this->draw_rectangle);
-        // float overflow_left = std::get<0>(res);
-        // float overflow_right = std::get<1>(res);
-        // std::cout << "OWL: " << overflow_left << std::endl;
-        // std::cout << "OWR: " << overflow_right << std::endl;
         this->temp_pointer = this->text.size();
         while(this->button_overflow_works());
         this->abs_overflow = this->text.size() - this->temp_pointer + 1;
-        // std::cout << this->abs_overflow << std::endl;
-        // std::cout << this->text.size() << std::endl;
         this->text_block.setString(this->text.substr(0, this->text.size() - this->abs_overflow));
         this->text_block.setOrigin(this->text_block.getGlobalBounds().getSize() / 2.f + this->text_block.getLocalBounds().getPosition());
         this->text_block.setPosition((sf::Vector2f)(this->rect.getPosition() + this->rect.getSize() / 2));

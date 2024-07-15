@@ -5,6 +5,7 @@ ATRC syntax:
 Variables
     - Variables are all constants. Redefining one will result in an error
     - Variables need to be defined before inserted into a value
+    - Non-special variables cannot start with a asterisk (*)
     - Defining a variable:
         - %var_name%=value
 
@@ -19,7 +20,7 @@ Special variables
             - Value can be inserted here by the program
     - Numeral insert
         - %*0%, %*1%, %*2%...
-            - With numeral inserts you can define the order the values will be inserted
+            - With numeral inserts you can define the order the values will be inserted, starting at 0
 
 Blocks
     - Blocks are an array that hold a set of keys

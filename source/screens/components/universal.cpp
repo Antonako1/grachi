@@ -3,16 +3,18 @@
 #include "../../grachi.hpp"
 #include "../../msg.hpp"
 
+#define EXTRA_CLIP_HELP 2.f
+
 bool check_text_clipping(const sf::Text& text_block, const sf::RectangleShape& rect) {
     // Get global bounds of the text block and the rectangle
     sf::FloatRect textBounds = text_block.getGlobalBounds();
     sf::FloatRect rectBounds = rect.getGlobalBounds();
 
     // Check if the text extends beyond the rectangle
-    bool extendsLeft = textBounds.left < rectBounds.left;
-    bool extendsRight = textBounds.left + textBounds.width > rectBounds.left + rectBounds.width;
-    bool extendsTop = textBounds.top < rectBounds.top;
-    bool extendsBottom = textBounds.top + textBounds.height > rectBounds.top + rectBounds.height;
+    bool extendsLeft = textBounds.left < rectBounds.left + EXTRA_CLIP_HELP;
+    bool extendsRight = textBounds.left + textBounds.width + EXTRA_CLIP_HELP> rectBounds.left + rectBounds.width;
+    bool extendsTop = textBounds.top < rectBounds.top + EXTRA_CLIP_HELP;
+    bool extendsBottom = textBounds.top + textBounds.height + EXTRA_CLIP_HELP > rectBounds.top + rectBounds.height;
 
     // If any condition is true, the text extends beyond the rectangle
     if (extendsLeft || extendsRight || extendsTop || extendsBottom) {

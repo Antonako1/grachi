@@ -18,6 +18,8 @@ extern style_element p;
 extern struct _colours {
     sf::Color green = sf::Color(0, 255, 102, 255);
 
+    sf::Color gray = sf::Color(120, 120, 120, 255);
+
     sf::Color black = sf::Color(15, 15, 15, 255);
     
     sf::Color white = sf::Color(200, 200, 200, 255);
@@ -48,3 +50,8 @@ pos 0, 1, 2 = Green, black, white
 opposites 3, 4, 5 = White, black, green
 ---*/
 extern colour_preset gbw_preset;
+/*+++
+pos 0, 1, 2 = Green, gray, white
+opposites 3, 4, 5 = White, CHOOSE ANYTHING, green
+---*/
+extern colour_preset ggw_preset;

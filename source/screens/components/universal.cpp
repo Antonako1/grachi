@@ -2,9 +2,22 @@
 #include "../../styling.hpp"
 #include "../../grachi.hpp"
 #include "../../msg.hpp"
+#include "../screens.hpp"
+
+
+void scale_factor_calc(){
+    SCALE_WIDTH = float(WINDOW_RESOLUTION_HEIGHT) / float(ORIGINAL_WINDOW_RESOLUTION_HEIGHT);
+    SCALE_HEIGHT = float(WINDOW_RESOLUTION_HEIGHT) / float(ORIGINAL_WINDOW_RESOLUTION_HEIGHT);
+}
+
+sf::Vector2i scale_factor_calc_gui_element(const sf::Vector2i in){
+    sf::Vector2i res;
+    res.x = int((float)in.x * SCALE_WIDTH);
+    res.y = int((float)in.y * SCALE_HEIGHT);
+    return res;
+}
 
 #define EXTRA_CLIP_HELP 2.f
-
 bool check_text_clipping(const sf::Text& text_block, const sf::RectangleShape& rect) {
     // Get global bounds of the text block and the rectangle
     sf::FloatRect textBounds = text_block.getGlobalBounds();
@@ -17,7 +30,9 @@ bool check_text_clipping(const sf::Text& text_block, const sf::RectangleShape& r
     bool extendsBottom = textBounds.top + textBounds.height + EXTRA_CLIP_HELP > rectBounds.top + rectBounds.height;
 
     // If any condition is true, the text extends beyond the rectangle
-    if (extendsLeft || extendsRight || extendsTop || extendsBottom) {
+    if (extendsLeft || extendsRight
+    // || extendsTop || extendsBottom
+    ) {
         return true;
     } else {
         return false;
@@ -31,15 +46,6 @@ std::tuple<float, float> get_lr_overflow(const sf::Text& text_block, const sf::R
     bool extendsRight = (textBounds.left + textBounds.width) - (rectBounds.left + rectBounds.width);
     return std::make_tuple(extendsLeft, extendsRight);
 }
-
-enum class UNIVERSAL_TYPE{
-    button = 0,
-};
-
-
-#ifdef DEBUG
-# include <iostream>
-#endif
 
 std::string rotating_text( 
     const std::string &source_text, 
@@ -72,13 +78,27 @@ std::string rotating_text(
     return res;
 }
 
+// Everything rotates at the same time
 float last_text_rotate = 0;
 
+bool check_legal_rotation(){
+    return sec.asSeconds() - TEXT_SCROLL_SPEED >= last_text_rotate;
+}
 
 void rotating_text_button(button &instance){
-    if(sec.asSeconds() - TEXT_SCROLL_SPEED >= last_text_rotate){
+    if(check_legal_rotation()){
         std::string res = rotating_text(instance.text, instance.abs_overflow, instance.rotating_text_pointer);
         instance.text_block.setString(res);
-        last_text_rotate = sec.asSeconds();
     }
+}
+
+void rotating_text_text(text &instance){
+    if(check_legal_rotation()){
+        std::string res = rotating_text(instance.str_text, instance.abs_overflow, instance.rotating_text_pointer);
+        instance.text_block.setString(res);
+    }
+}
+
+void update_rotate_timer(){
+    last_text_rotate = sec.asSeconds();
 }

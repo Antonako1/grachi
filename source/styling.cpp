@@ -15,3 +15,11 @@ colour_preset gbw_preset(
     colours.black,
     sf::Color(0, 255, 102, 255)
 );
+colour_preset ggw_preset(
+    colours.green,
+    colours.gray,
+    colours.white,
+    sf::Color(200, 200, 200, 255),
+    colours.black,
+    sf::Color(0, 255, 102, 255)
+);

@@ -62,6 +62,10 @@ void m_nrm(std::string sMsg, int iMsg, int fl, bool fatal){
             func_generated = "Error with mathematical calculations";
             error_colouring = true;
             break;
+        case IMAGE_ERROR:
+            func_generated = "Error with images";
+            error_colouring = true;
+            break;
         default:
         case UNKNOWN_MESSAGE:
             func_generated = "Unknown message";

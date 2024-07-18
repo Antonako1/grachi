@@ -6,6 +6,7 @@
 #include "./grachi.hpp"
 #include "./states.hpp"
 #include "./screens/screens.hpp"
+#include "./screens/components/universal.hpp"
 #include "./msg.hpp"
 #include "./styling.hpp"
 #include "./atrc_fd.hpp"
@@ -21,9 +22,20 @@ main_states main_state;
 main_menu_states main_menu_state;
 game_states game_state;
 
+size_t ORIGINAL_WINDOW_RESOLUTION_WIDTH = 1024;
+size_t ORIGINAL_WINDOW_RESOLUTION_HEIGHT = 768;
+size_t WINDOW_WIDTH_MIDDLE = ORIGINAL_WINDOW_RESOLUTION_WIDTH / 2;
+size_t WINDOW_HEIGHT_MIDDLE = ORIGINAL_WINDOW_RESOLUTION_HEIGHT / 2;
+size_t WINDOW_RESOLUTION_WIDTH      = 1024;
+size_t WINDOW_RESOLUTION_HEIGHT     = 768;
+size_t WINDOW_ASPECT_RATIO_WIDTH    = 4;
+size_t WINDOW_ASPECT_RATIO_HEIGHT   = 3;
+float SCALE_WIDTH                   = 1;
+float SCALE_HEIGHT                  = 1;
+
 float dt;
 sf::Time sec;
-sf::RenderWindow window(sf::VideoMode(1024, 768), "grachi");
+sf::RenderWindow window(sf::VideoMode(WINDOW_RESOLUTION_WIDTH, WINDOW_RESOLUTION_HEIGHT), "grachi");
 sf::Font font;
 
 std::string get_project_root_path() {
@@ -46,6 +58,10 @@ std::string get_home_dir() {
 }
 
 int main(int argc, char const *argv[]){
+
+    // SCALE_WIDTH = scale_factor_calc();
+    // SCALE_HEIGHT = scale_factor_calc();
+    
     #ifdef DEBUG
     m_dbg("Debug is enabled");
     #endif
@@ -54,19 +70,26 @@ int main(int argc, char const *argv[]){
     project_in_home_docs = get_home_dir() + "\\Documents\\grachi\\";
 #ifdef DEBUG
     atrc_path = project_root_path + "\\assets\\data\\";
-    image_path = project_root_path + "\\assets\\images";
+    image_path = project_root_path + "\\assets\\images\\";
     audio_path = project_root_path + "\\assets\\audio\\";
     std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
+    // std::string fontPath = project_root_path + "\\assets\\fonts\\ARIBLK.ttf";
 #else
     atrc_path = project_in_home_docs + "\\assets\\data\\";
     image_path = project_in_home_docs + "\\assets\\images\\";
     audio_path = project_in_home_docs + "\\assets\\audio\\";
     std::string fontPath = project_in_home_docs + "\\assets\\fonts\\clacon2.ttf";
 #endif
-
     if (!font.loadFromFile(fontPath)) {
         m_nrm("Error loading the font", FONT_ERROR, FL_GRACHI, true);
     }
+
+    sf::Uint32 cyrillic_p = 0x0000043f;
+    if (!font.hasGlyph(sf::Uint32(cyrillic_p))) {
+        std::cerr << "font error" << std::endl;
+        exit(1);
+    }
+    
     Airplane test;
     test.initialize_airplane("su25");
 

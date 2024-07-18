@@ -6,6 +6,8 @@ gallery_button=Gallery
 logs_button=Logs
 options_button=Options
 exit_button=Exit to windows
+heading_text=Grachi
+heading_text=Грачи
 
 [WELCOME_MESSAGES]
-msg_amount=1
+msg_amount=1Грачи

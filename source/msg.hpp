@@ -21,6 +21,7 @@ enum msg_numbers {
     LIST_OUT_OF_BOUNDS_ERROR,
     CAST_CONVERSION_ERROR,
     MATH_ERROR,
+    IMAGE_ERROR,
 };
 
 void m_nrm(std::string sMsg, int iMsg, int fl, bool fatal);

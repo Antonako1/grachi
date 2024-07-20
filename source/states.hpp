@@ -10,8 +10,6 @@ enum class main_menu_states {
     initialize,
     in_main_menu,
     in_options,
-    start_new_game,
-    load_game,
 };
 
 enum class game_states{

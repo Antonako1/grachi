@@ -21,7 +21,6 @@ text::text(
     this->rect.setSize(static_cast<sf::Vector2f>(size));
     this->initialize();
 }
-#include <iostream>
 
 void text::initialize(){
     this->rect.setFillColor(this->colours.background);

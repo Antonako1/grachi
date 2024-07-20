@@ -132,3 +132,7 @@ void rotating_text_text(text &instance){
 void update_rotate_timer(){
     last_text_rotate = sec.asSeconds();
 }
+
+void left_to_right_text_render(){
+
+}

@@ -2,18 +2,31 @@
 #include "./game_class.hpp"
 #include "../states.hpp"
 #include "../grachi.hpp"
+#include "../atrc_fd.hpp"
 
 game running_game;
 
-void game::initialize(){
+void game::add_to_console(console_item ci){
 
+    this->console_items.push_back(ci);
+}
+
+void game::initialize(){
+    console_item ci = console_item(text_wrapping(sf::Vector2i(0,0), sf::Vector2i(CONSOLE_WIDTH, 50), utf8_decode("Hello"), gbw_preset, p), sec);
+    this->add_to_console(ci);
 }
 
 void game::load(){
 
 }
 
-void game::draw_game(){}
+void game::draw_console_screen(){
+
+}
+
+void game::draw_game(){
+    game::draw_console_screen();
+}
 void game::draw_esc_overlay(){}
 
 void game::events(){

@@ -11,7 +11,7 @@
 
 ### Windows, Visual Studio:
 - C++ CMake tools for windows
-- C++ v14.xx build tools for (processor)
+- C++ v17.xx build tools for (processor)
 - MSVC build tools
 
 

@@ -12,8 +12,8 @@ void Main_Menu::initialize(){
     std::unique_ptr<ATRCFiledata> fd = reader("locale\\main_menu.atrc");
     // Start
     std::string buffer = read_key_as_string(fd.get(), "MAIN_MENU", "start_button"); 
-    int y = 300;
-    size_t x = WINDOW_WIDTH_MIDDLE + BUTTON_NORMAL_WIDTH + 20;
+    int y = 400;
+    size_t x = WINDOW_RESOLUTION_WIDTH - BUTTON_NORMAL_WIDTH - (BUTTON_NORMAL_WIDTH/2);
     button temp_button = button(sf::Vector2i(x, y), gbw_preset, buffer, h3, static_cast<size_t>(MAIN_MENU_BUTTONS::Start));
     this->buttons.push_back(temp_button);
     y += BUTTON_NORMAL_HEIGHT_ADD;
@@ -51,7 +51,7 @@ void Main_Menu::initialize(){
 
     // Heading text
     buffer = read_key_as_string(fd.get(), "MAIN_MENU", "heading_text");
-    text temp_text = text(sf::Vector2i(x-50, 100), sf::Vector2i(BUTTON_NORMAL_WIDTH + (50*2), 100), utf8_decode(buffer), ggw_preset, h1);
+    text temp_text = text(sf::Vector2i(x-50, 100), sf::Vector2i(BUTTON_NORMAL_WIDTH + (50*2), 100), utf8_decode(buffer), gbw_preset, h1);
     this->texts.push_back(temp_text);
 
     if(!this->background_image.loadFromFile(image_path + "non_map\\menu_background.bmp")){

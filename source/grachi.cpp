@@ -22,12 +22,15 @@ main_states main_state;
 main_menu_states main_menu_state;
 game_states game_state;
 
-size_t ORIGINAL_WINDOW_RESOLUTION_WIDTH = 1024;
-size_t ORIGINAL_WINDOW_RESOLUTION_HEIGHT = 768;
+#define START_WIDTH 1440
+#define START_HEIGHT 900
+
+size_t ORIGINAL_WINDOW_RESOLUTION_WIDTH = START_WIDTH;
+size_t ORIGINAL_WINDOW_RESOLUTION_HEIGHT = START_HEIGHT;
 size_t WINDOW_WIDTH_MIDDLE = ORIGINAL_WINDOW_RESOLUTION_WIDTH / 2;
 size_t WINDOW_HEIGHT_MIDDLE = ORIGINAL_WINDOW_RESOLUTION_HEIGHT / 2;
-size_t WINDOW_RESOLUTION_WIDTH      = 1024;
-size_t WINDOW_RESOLUTION_HEIGHT     = 768;
+size_t WINDOW_RESOLUTION_WIDTH      = START_WIDTH;
+size_t WINDOW_RESOLUTION_HEIGHT     = START_HEIGHT;
 size_t WINDOW_ASPECT_RATIO_WIDTH    = 4;
 size_t WINDOW_ASPECT_RATIO_HEIGHT   = 3;
 float SCALE_WIDTH                   = 1;
@@ -65,10 +68,17 @@ std::string get_home_dir() {
 }
 
 int main(int argc, char const *argv[]){
-
     // SCALE_WIDTH = scale_factor_calc();
     // SCALE_HEIGHT = scale_factor_calc();
-    
+
+    main_state = main_states::in_main_menu;
+    main_menu_state = main_menu_states::initialize;
+    game_state = game_states::initialize;
+    for(int i = 0; i < argc; i++){
+        if(strcmp(argv[i], "--fast")){
+            main_state = main_states::in_game;
+        }
+    }
     #ifdef DEBUG
     m_dbg("Debug is enabled");
     #endif
@@ -93,10 +103,6 @@ int main(int argc, char const *argv[]){
     
     Airplane test;
     test.initialize_airplane("su25");
-
-    main_state = main_states::in_main_menu;
-    main_menu_state = main_menu_states::initialize;
-    game_state = game_states::initialize;
 
     sf::Clock deltaClock = sf::Clock();
     sf::Clock other_clock = sf::Clock();

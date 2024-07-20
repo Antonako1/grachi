@@ -2,9 +2,6 @@
 #define ATRC_FD_H
 #include <ATRC.h>
 
-
-void initialize_asset_data();
-
 std::string read_key_as_string(ATRCFiledata *fd, const std::string block, const std::string key);
 void read_key_to_string(ATRCFiledata *fd, const std::string block, const std::string key, std::string input);
 
@@ -28,11 +25,7 @@ std::vector<std::string> atrc_value_to_list(const std::string &value);
 std::unique_ptr<ATRCFiledata> reader(const std::string& filename);
 
 /// Convert an UTF8 string to a wide Unicode String. 
-/// \note USE THIS WHEN CONVERTING FROM UTF TO WSTRING
 std::wstring utf8_decode(const std::string &str);
-
-// Convert a wide Unicode string to an UTF8 string
-std::string utf8_encode(const std::wstring &wstr);
 
 // trim from start (in place)
 inline void ltrim(std::string &s) {

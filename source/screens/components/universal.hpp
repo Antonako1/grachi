@@ -29,3 +29,5 @@ enum class ARGUI {
 sf::Vector2i scale_factor_calc_gui_element(const sf::Vector2i in);
 
 void scale_factor_calc();
+
+#define LEFT_TO_RIGHT_TEXT_RENDER_SPEED 0.02

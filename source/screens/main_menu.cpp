@@ -51,7 +51,8 @@ void Main_Menu::initialize(){
 
     // Heading text
     buffer = read_key_as_string(fd.get(), "MAIN_MENU", "heading_text");
-    text temp_text = text(sf::Vector2i(x-50, 100), sf::Vector2i(BUTTON_NORMAL_WIDTH + (50*2), 100), buffer, ggw_preset, h1);
+    std::wstring conversion = utf8_decode(buffer);
+    text temp_text = text(sf::Vector2i(x-50, 100), sf::Vector2i(BUTTON_NORMAL_WIDTH + (50*2), 100), conversion, ggw_preset, h1);
     this->texts.push_back(temp_text);
 
     if(!this->background_image.loadFromFile(image_path + "non_map\\menu_background.bmp")){
@@ -74,6 +75,8 @@ void Main_Menu::events(){
                         switch(static_cast<MAIN_MENU_BUTTONS>(btn.action)){
                             case MAIN_MENU_BUTTONS::Start:
                                 m_dbg("STARTING GAME");
+                                main_state = main_states::in_game;
+                                game_state = game_states::initialize;
                                 break;
                             case MAIN_MENU_BUTTONS::Continue:
                             case MAIN_MENU_BUTTONS::Load:
@@ -85,7 +88,7 @@ void Main_Menu::events(){
                                 window.close();
                                 break;
                             default:
-                                m_nrm("Click on a useless button...", PROGRAM_INFO, FL_MAIN_MENU, false);
+                                m_nrm("Click on a undefined button... action_(" + std::to_string(btn.action) + ')', PROGRAM_INFO, FL_MAIN_MENU, false);
                                 break;
                         }
                     }
@@ -101,7 +104,6 @@ void Main_Menu::events(){
 }
 
 void Main_Menu::draw_main_menu(){
-    window.clear();
     window.draw(this->background_image_sprite);
     for(auto &btn : this->buttons){
         btn.draw(this->ms);
@@ -112,8 +114,6 @@ void Main_Menu::draw_main_menu(){
     if(check_legal_rotation()){
         update_rotate_timer();
     }
-
-    window.display();
 }
 
 void Main_Menu::draw_option_overlay(){
@@ -132,7 +132,9 @@ void main_menu_main_loop(){
             break;
         case main_menu_states::in_main_menu: 
             main_menu.events();
+            clear_window();
             main_menu.draw_main_menu();
+            update_window();
             break;
         case main_menu_states::in_options: 
             main_menu.events();

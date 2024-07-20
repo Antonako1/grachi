@@ -11,7 +11,7 @@ bool text::text_overflow_works(){
 text::text(
     sf::Vector2i pos,
     sf::Vector2i size,
-    std::string txt,
+    std::wstring txt,
     colour_preset colours,
     style_element style
 )

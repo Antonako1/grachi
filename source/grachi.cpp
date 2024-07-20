@@ -38,6 +38,13 @@ sf::Time sec;
 sf::RenderWindow window(sf::VideoMode(WINDOW_RESOLUTION_WIDTH, WINDOW_RESOLUTION_HEIGHT), "grachi");
 sf::Font font;
 
+void update_window(){
+    window.display();
+}
+void clear_window(){
+    window.clear();
+}
+
 std::string get_project_root_path() {
     char path[MAX_PATH];
     GetModuleFileNameA(NULL, path, MAX_PATH);
@@ -83,12 +90,6 @@ int main(int argc, char const *argv[]){
     if (!font.loadFromFile(fontPath)) {
         m_nrm("Error loading the font", FONT_ERROR, FL_GRACHI, true);
     }
-
-    sf::Uint32 cyrillic_p = 0x0000043f;
-    if (!font.hasGlyph(sf::Uint32(cyrillic_p))) {
-        std::cerr << "font error" << std::endl;
-        exit(1);
-    }
     
     Airplane test;
     test.initialize_airplane("su25");
@@ -99,11 +100,13 @@ int main(int argc, char const *argv[]){
 
     sf::Clock deltaClock = sf::Clock();
     sf::Clock other_clock = sf::Clock();
+    window.setFramerateLimit(60);
     while (window.isOpen()){
         float dt = deltaClock.restart().asSeconds();
         sec = other_clock.getElapsedTime();
         switch (main_state) {
             case main_states::in_game:
+                game_master_loop();
                 break;
             case main_states::in_main_menu:
                 main_menu_main_loop();
@@ -113,3 +116,53 @@ int main(int argc, char const *argv[]){
     
     return 0;
 }
+
+
+
+
+// #include <SFML/Graphics.hpp>
+// #include <Windows.h>
+
+// // Convert a wide Unicode string to an UTF8 string
+// std::string utf8_encode(const std::wstring &wstr)
+// {
+//     if( wstr.empty() ) return std::string();
+//     int size_needed = WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), NULL, 0, NULL, NULL);
+//     std::string strTo( size_needed, 0 );
+//     WideCharToMultiByte                  (CP_UTF8, 0, &wstr[0], (int)wstr.size(), &strTo[0], size_needed, NULL, NULL);
+//     return strTo;
+// }
+
+// // Convert an UTF8 string to a wide Unicode String
+// std::wstring utf8_decode(const std::string &str)
+// {
+//     if( str.empty() ) return std::wstring();
+//     int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+//     std::wstring wstrTo( size_needed, 0 );
+//     MultiByteToWideChar                  (CP_UTF8, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
+//     return wstrTo;
+// }
+
+// int main(){
+//     auto context_settings = sf::ContextSettings();
+//     auto window = sf::RenderWindow{ sf::VideoMode{{500, 500}}, "Hello World", sf::State::Windowed, context_settings};
+//     window.setFramerateLimit(60);
+//     auto font = sf::Font::openFromFile("C:\\Windows\\Fonts\\Arial.ttf").value();
+//     auto text = sf::Text{ font };
+
+//     std::string str = "привет";
+//     std::wstring new_str = utf8_decode(str);
+//     text.setString(new_str);
+
+//     while (window.isOpen()){
+//         while (auto event = window.pollEvent()) {
+//             if (event.value().is<sf::Event::Closed>()){
+//                 window.close();
+//             }
+//         }
+//         window.clear();
+//         window.draw(text);
+//         window.display();
+//     }
+//     return 0;
+// }

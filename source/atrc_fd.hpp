@@ -27,6 +27,13 @@ std::vector<std::string> atrc_value_to_list(const std::string &value);
 // Points automatically to \\assets\\data\\. Just send the path from that point onwards...
 std::unique_ptr<ATRCFiledata> reader(const std::string& filename);
 
+/// Convert an UTF8 string to a wide Unicode String. 
+/// \note USE THIS WHEN CONVERTING FROM UTF TO WSTRING
+std::wstring utf8_decode(const std::string &str);
+
+// Convert a wide Unicode string to an UTF8 string
+std::string utf8_encode(const std::wstring &wstr);
+
 // trim from start (in place)
 inline void ltrim(std::string &s) {
     s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {

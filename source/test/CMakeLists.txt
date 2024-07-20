@@ -4,25 +4,6 @@ set (CMAKE_CXX_STANDARD 17)
 if(NOT WIN32)
   message(FATAL_ERROR "Supported only for Windows")
 endif()
-
-message(STATUS "For C++")
-message(STATUS "Compiler: ${CMAKE_CXX_COMPILER}")
-message(STATUS "Compiler target: ${CMAKE_CXX_COMPILER_TARGET}")
-message(STATUS "Compiler toolchain: ${CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN}")
-message(STATUS "Compiler id: ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "Compiler loaded: ${CMAKE_CXX_COMPILER_LOADED}")
-message(STATUS "Compiler predefined commands: ${CMAKE_CXX_COMPILER_PREDEFINES_COMMAND}")
-message(STATUS "Compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
-
-message(STATUS "For C")
-message(STATUS "Compiler: ${CMAKE_C_COMPILER}")
-message(STATUS "Compiler target: ${CMAKE_C_COMPILER_TARGET}")
-message(STATUS "Compiler toolchain: ${CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN}")
-message(STATUS "Compiler id: ${CMAKE_C_COMPILER_ID}")
-message(STATUS "Compiler loaded: ${CMAKE_C_COMPILER_LOADED}")
-message(STATUS "Compiler predefined commands: ${CMAKE_C_COMPILER_PREDEFINES_COMMAND}")
-message(STATUS "Compiler version: ${CMAKE_C_COMPILER_VERSION}")
-
 # set(CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE "x64")
 
 if(USEDEBUG STREQUAL "1")
@@ -42,17 +23,8 @@ endif()
 
 # Set the paths to your source files
 file(GLOB SOURCES 
-"source/*.cpp"
-"source/*.hpp"
-"source/screens/*.cpp"
-"source/screens/*.hpp"
-"source/screens/components/*.cpp"
-"source/screens/components/*.hpp"
-"source/vehicles/*.cpp"
-"source/vehicles/*.hpp"
-
-# test
-# "source/grachi.cpp"
+"./*.cpp"
+"./*.hpp"
 )
 
 # Look for ATRC library
@@ -70,7 +42,6 @@ set(SFML_INCLUDE_DIR "${SFML_DIR}/include")
 list(APPEND CMAKE_PREFIX_PATH "${SFML_DIR}")
 
 find_package(SFML 2.6 COMPONENTS system window graphics audio REQUIRED)
-# find_package(SFML 3 COMPONENTS Graphics Audio REQUIRED)
 
 if(NOT SFML_FOUND)
   MESSAGE(FATAL_ERROR "SFML not found")

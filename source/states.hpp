@@ -16,6 +16,7 @@ enum class main_menu_states {
 
 enum class game_states{
     initialize,
+    load_game,
     in_game,
     in_esc_menu,
     in_options

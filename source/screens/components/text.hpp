@@ -10,13 +10,13 @@ public:
     text(
         sf::Vector2i pos,
         sf::Vector2i size,
-        std::string txt,
+        std::wstring txt,
         colour_preset colours,
         style_element style
     );
     size_t abs_overflow = 0; // ROTATING TEXT
     size_t rotating_text_pointer = 0;  // ROTATING TEXT
-    std::string str_text;
+    std::wstring str_text;
     void draw();
     sf::Text text_block;
 private:

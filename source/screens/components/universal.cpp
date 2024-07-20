@@ -77,6 +77,36 @@ std::string rotating_text(
     }
     return res;
 }
+std::wstring wrotating_text( 
+    const std::wstring &source_text, 
+    const size_t overflow,
+    size_t &pointer
+    )
+{
+    std::wstring res = L"";
+    size_t source_length = source_text.size();
+    size_t complete_length = (source_length - overflow);
+
+    if (complete_length <= 0) {
+        return res;
+    }
+    for(size_t i = pointer; i < complete_length + pointer && source_length > i; i++){
+        res += source_text[i];
+    }
+    if(res.size() >= complete_length){
+        pointer++;
+        return res;
+    }
+    res += L" ";
+    for(size_t i = 0; res.size() < complete_length; i++){
+        res += source_text[i];
+    }
+    pointer++;
+    if(pointer > source_length){
+        pointer = 0;
+    }
+    return res;
+}
 
 // Everything rotates at the same time
 float last_text_rotate = 0;
@@ -94,7 +124,7 @@ void rotating_text_button(button &instance){
 
 void rotating_text_text(text &instance){
     if(check_legal_rotation()){
-        std::string res = rotating_text(instance.str_text, instance.abs_overflow, instance.rotating_text_pointer);
+        std::wstring res = wrotating_text(instance.str_text, instance.abs_overflow, instance.rotating_text_pointer);
         instance.text_block.setString(res);
     }
 }

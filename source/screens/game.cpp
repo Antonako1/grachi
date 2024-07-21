@@ -7,8 +7,8 @@
 game running_game;
 
 void game::add_to_console(console_item ci){
-
     this->console_items.push_back(ci);
+    // Update positioning of console items
 }
 
 void game::initialize(){

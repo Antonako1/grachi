@@ -63,7 +63,7 @@ std::string get_home_dir() {
     homeDir = homePath ? std::string(homePath) : "";
     free(homePath);
     if(homeDir == "")
-        throw std::runtime_error("Could not get home directory, please set the HOME flag.");
+        throw std::runtime_error("Could not get home directory");
     return homeDir;
 }
 
@@ -90,7 +90,6 @@ int main(int argc, char const *argv[]){
     image_path = project_root_path + "\\assets\\images\\";
     audio_path = project_root_path + "\\assets\\audio\\";
     std::string fontPath = project_root_path + "\\assets\\fonts\\clacon2.ttf";
-    // std::string fontPath = project_root_path + "\\assets\\fonts\\ARIBLK.ttf";
 #else
     atrc_path = project_in_home_docs + "\\assets\\data\\";
     image_path = project_in_home_docs + "\\assets\\images\\";

@@ -1,7 +1,2 @@
-*.exe
+libs/
 build/
-release_building/output/
-.AppImage
-opencv/
-atrc/
-sfml/

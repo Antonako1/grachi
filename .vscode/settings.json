@@ -78,6 +78,23 @@
         "set": "cpp",
         "stack": "cpp",
         "typeindex": "cpp",
-        "resources.h": "cpp"
-    }
+        "resources.h": "cpp",
+        "main.h": "cpp",
+        "arghand.h": "cpp",
+        "cef_browser.h": "cpp",
+        "cef_app.h": "cpp",
+        "cef_helpers.h": "cpp",
+        "cef_client.h": "cpp",
+        "webview.h": "cpp",
+        "thread": "cpp",
+        "fstream": "cpp",
+        "condition_variable": "cpp",
+        "cwctype": "cpp",
+        "coroutine": "cpp",
+        "resumable": "cpp",
+        "future": "cpp",
+        "mutex": "cpp",
+        "queue": "cpp",
+        "stop_token": "cpp"
+    },
 }

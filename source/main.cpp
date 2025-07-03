@@ -1,14 +1,12 @@
+#include <webview/webview.h>
+#include <Arghand.h>
 #include "main.h"
 #include <iostream>
-#include <Arghand.h>
+#include <string>
+#include <filesystem>
+#include <fstream>
 
-sf::RenderWindow WINDOW; // defined in graphic.h
-StateLocation CURRENT_STATE = StateLocation::MainMenu; // defined in main.h
-GameState CURRENT_GAME_STATE = GameState::None; // defined in main.h
-MainMenuState CURRENT_MAIN_MENU_STATE = MainMenuState::None; // defined in main.h
-SettingsState CURRENT_SETTINGS_STATE = SettingsState::None; // defined in main.h
-
-
+webview::webview* WEBVIEW = nullptr; // Global webview instance
 
 int main(int argc, char* argv[]) {
     Arghand handler;
@@ -18,14 +16,14 @@ int main(int argc, char* argv[]) {
     };
     handler.SetCmdOptions(options);
     handler.SetSeparator(',');
-
+    
     handler.SetParserOptions(
         (ParserOptions::DefaultOptions |
         ParserOptions::VersionDisplayFooter ) & 
         ~(ParserOptions::HelpDisplayAppName | 
         ParserOptions::HelpDisplayVersion) 
     );
-
+    
     handler.SetApplicationName("Grachi");
     handler.SetHelpHeader("Usage: \n\tGrachi [options]\n");
     handler.SetHelpFooter("\nMaintained at https://github.com/Antonako1/grachi.");
@@ -45,62 +43,46 @@ int main(int argc, char* argv[]) {
     }
 
 
-
-    // Initialize the SFML window
-    WINDOW = sf::RenderWindow{
-        sf::VideoMode{{800u, 600u}}, "Grachi",
-    };
-
-    while (WINDOW.isOpen()) {
-        // State machine handling
-        switch (CURRENT_STATE) {
-            case StateLocation::MainMenu:
-                // Handle main menu logic
-                if (CURRENT_MAIN_MENU_STATE == MainMenuState::StartGame) {
-                    CURRENT_STATE = StateLocation::Game;
-                    CURRENT_GAME_STATE = GameState::StartFreshGame; // Set initial game state
-                } else if (CURRENT_MAIN_MENU_STATE == MainMenuState::ContinueGame) {
-                    CURRENT_STATE = StateLocation::Game;
-                    CURRENT_GAME_STATE = GameState::ContinueGame; // Set initial game state
-                } else if (CURRENT_MAIN_MENU_STATE == MainMenuState::OpenSettings) {
-                    CURRENT_STATE = StateLocation::Settings;
-                } else if (CURRENT_MAIN_MENU_STATE == MainMenuState::LoadSavedGame) {
-                    CURRENT_STATE = StateLocation::LoadSavedGame;
-                }  else if (CURRENT_MAIN_MENU_STATE == MainMenuState::ExitGame) {
-                    WINDOW.close();
-                }
-                break;
-
-            case StateLocation::Game:
-                // Handle game logic
-                if (CURRENT_GAME_STATE == GameState::ExitGame) {
-                    WINDOW.close();
-                }
-                break;
-
-            case StateLocation::Settings:
-                // Handle settings logic
-                if (CURRENT_SETTINGS_STATE == SettingsState::BackToMainMenu) {
-                    CURRENT_STATE = StateLocation::MainMenu;
-                    CURRENT_MAIN_MENU_STATE = MainMenuState::None; // Reset state
-                }
-                break;
-
-            case StateLocation::Exit:
-                WINDOW.close();
-                break;
-
-            default:
-                break;
+    std::ifstream html_fstream;
+    try {
+        
+        // read the HTML file
+        std::string html = std::filesystem::path("../html/index.html").string();
+        if (!std::filesystem::exists(html)) {
+            std::cerr << "HTML file not found: " << html << '\n';
+            return 1;
         }
 
-        // while (const std::optional event = WINDOW.pollEvent()){
-        //     if (event->is<sf::Event::Closed>())
-        //         WINDOW.close();
-        // }
-        // WINDOW.clear();
-        // WINDOW.display();
-    }
+        // Load the HTML content
+        html_fstream = std::ifstream(html);
+        if (!html_fstream.is_open()) {
+            std::cerr << "Failed to open HTML file: " << html << '\n';
+            return 1;
+        }
+        std::string line;
+        std::string html_content;
+        while (std::getline(html_fstream, line)) {
+            html_content += line + '\n';
+        }
 
+        if (html_content.empty()) {
+            std::cerr << "Failed to read HTML file: " << html << '\n';
+            return 1;
+        }
+
+        webview::webview w(true, nullptr);
+        WEBVIEW = &w;
+        WEBVIEW->set_title("Grachi");
+        WEBVIEW->set_title("Grachi");
+        WEBVIEW->set_size(1024, 768, WEBVIEW_HINT_FIXED);
+        WEBVIEW->set_html(html_content);
+        WEBVIEW->run();
+        
+    } catch (const webview::exception &e) {
+        std::cerr << e.what() << '\n';
+        html_fstream.close();
+        return 1;
+    }
+    html_fstream.close();
     return 0;
 }

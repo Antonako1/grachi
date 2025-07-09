@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "default",
+            "inherits": "windows-base",
+            "environment": {
+                "VCPKG_ROOT": "$env{userprofile}\\source\\repos\\Grachi\\vcpkg_installed"
+            }
+        }
+    ]
+}

@@ -3,7 +3,9 @@
 #include <Arghand.h>
 #include <ATRC.h>
 
-
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
+#include <raylib.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +13,6 @@ int main(int argc, char *argv[])
     std::vector<CmdOption> options = {
         CMD_OPTION("h", "help",     HelpOptionDefault,      "",           "Display help information"),
         CMD_OPTION("v", "",  VersionOptionDefault,   "",           "Display version information"),
-        CMD_OPTION("o", "output",   InputDefault,           "output.txt", "Specify output file"),
-        CMD_OPTION("l", "list",     ListInputDefault,       "a,b",           "Specify a list of values (comma-separated)"),
     };
     handler.SetCmdOptions(options);
     handler.SetSeparator(',');
@@ -30,12 +30,32 @@ int main(int argc, char *argv[])
         std::cerr << "Error parsing command line arguments." << std::endl;
         return 1;
     }
-    if (res != Arghand::ParseResult::SuccessWithHelp || res != Arghand::ParseResult::SuccessWithVersion) {
+    if (res != Arghand::ParseResult::SuccessWithHelp && res != Arghand::ParseResult::SuccessWithVersion) {
 
     }
 
 	std::cout << "Hello CMake.\n";
 
 
+    InitWindow(800, 600, "Raylib + Raygui in Visual Studio");
+    SetTargetFPS(60);
+
+    float slider = 50.0f;
+    bool toggle = true;
+    char text[64] = "Hello, Raygui!";
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        GuiLabel({ 20, 20, 200, 20 }, "Visual Studio + Raylib + Raygui");
+        GuiSlider({ 20, 60, 200, 20 }, "Min", "Max", &slider, 0, 100);
+        toggle = GuiCheckBox({ 20, 100, 20, 20 }, "Enable?", &toggle);
+        GuiTextBox({ 20, 140, 200, 30 }, text, 64, true);
+
+        EndDrawing();
+    }
+
+    CloseWindow();
 	return 0;
 }

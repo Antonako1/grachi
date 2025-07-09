@@ -35,4 +35,7 @@ if(WIN32)
     )
 endif()
 
-# TODO: Add tests and install targets if needed.
+# Add raylib
+set(raylib_DIR "${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-windows/share/raylib")
+find_package(raylib CONFIG REQUIRED)
+target_link_libraries(Grachi PRIVATE raylib)

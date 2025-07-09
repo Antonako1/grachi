@@ -1,6 +1,3 @@
-libs/
-build/
-release/
-*.zip
-*.love
-*.tmp
+out/
+.vs/
+.vscode/

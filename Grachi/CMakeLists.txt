@@ -11,10 +11,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Grachi 
     Grachi.cpp
-)
+ "Menu.cpp" "CommonNon.cpp" "Settings.cpp")
 
+target_include_directories(Grachi PRIVATE ${CMAKE_SOURCE_DIR})
 
-target_include_directories(Grachi PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 set(LIBS_DIR "${CMAKE_SOURCE_DIR}/libs")
 

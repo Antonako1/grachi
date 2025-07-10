@@ -19,8 +19,8 @@ typedef struct button_data {
 #define DEFAULT_BTN_HEIGHT 40
 
 struct prevState {
-	int Major;
-	int Minor;
+	int Major; // Grachi::States
+	int Minor; // Any other state
 };
 
 

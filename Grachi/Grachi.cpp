@@ -1,5 +1,4 @@
-﻿
-#include "Grachi.h"
+﻿#include "Grachi.h"
 #include <Arghand.h>
 
 #define RAYGUI_IMPLEMENTATION
@@ -47,7 +46,7 @@ void Grachi::BeginGame() {
             break;
         case States::Exit:
         default:
-            return; // exit function, triggering destructor inside main
+            return; // exits this function, triggering destructor inside main
         }
     }
 }
@@ -118,6 +117,7 @@ Grachi* GameInstance;
 
 
 std::string BASE_PATH;
+std::string _APPDATA_PATH;
 
 int main(int argc, char *argv[])
 {   
@@ -128,6 +128,7 @@ int main(int argc, char *argv[])
     }
        
     BASE_PATH = GetExecutableDir();
+    _APPDATA_PATH = GetAppdataPath();
 
     GameInstance = &game;
     game.InitializeRaylib();

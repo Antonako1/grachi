@@ -15,6 +15,8 @@ public:
 		Controls,
 		Amount,
 	};
+	
+	void backToPreviousScreen() const;
 
 	void SetState(States a_state) { this->state = a_state; }
 	States GetState() const { return this->state; }
@@ -25,6 +27,15 @@ public:
 private:
 	States state;
 	int previousState;
+
+
+	struct settings {
+		float volume;
+	};
+
+	settings stngs;
+
+	bool changesMade;
 };
 
 #endif // SETTINGS_HPP

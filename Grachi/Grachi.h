@@ -4,6 +4,7 @@
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
 #define VERSION_PATCH 0
+#define _VERSION_ 1 // Increment with one when changing MAJOR.MINOR.PATCH
 
 #include "Menu.hpp"
 #include "Settings.hpp"

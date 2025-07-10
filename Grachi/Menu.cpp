@@ -21,7 +21,7 @@ void Menu::InitializeRaylib() {
 	float x = ((float)GetScreenWidth() / 2.f) - (width / 2.f);
 
 	// calculate button list height
-	float buttons_to_be_made = 6.f;
+	float buttons_to_be_made = (float)BtnIds::ButtonAmount;
 	float total_height = 0.f;
 	for (float i = 0; i < buttons_to_be_made; i++) {
 		B_I(total_height, height);
@@ -51,29 +51,29 @@ void Menu::UpdateLogics() {
 			if (CheckCollisionPointRec(pos, cur->rect)) {
 				switch (BtnIds(cur->id)) {
 				case BtnIds::Continue:
-					GameInstance->SetState(Grachi::States::InitContinue);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::InitContinue);
 					break;
 				case BtnIds::StartGame:
-					GameInstance->SetState(Grachi::States::InitStartGame);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::InitStartGame);
 					break;
 				case BtnIds::LoadGame:
-					GameInstance->SetState(Grachi::States::InitLoadGame);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::InitLoadGame);
 					break;
 				case BtnIds::Settings:
-					GameInstance->SetState(Grachi::States::InitSettings);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::InitSettings);
 					break;
 				case BtnIds::Credits:
-					GameInstance->SetState(Grachi::States::InitCredits);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::InitCredits);
 					break;
 				case BtnIds::Exit:
 				default:
-					GameInstance->SetState(Grachi::States::Exit);
 					GameInstance->setPrevState({ (int)GameInstance->GetState(), -1 });
+					GameInstance->SetState(Grachi::States::Exit);
 					break;
 				}
 			}

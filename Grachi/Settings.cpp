@@ -4,6 +4,7 @@
 Settings::Settings() {
 	this->state = States::Video;
 	this->previousState = (int)Grachi::States::MainMenu;
+	this->changesMade = false;
 }
 
 void Settings::Initialize(int previousState) {
@@ -14,8 +15,14 @@ Settings::~Settings() {
 
 }
 
-void Settings::UpdateLogics(){
+#include <iostream>
+void Settings::backToPreviousScreen() const {
+	GameInstance->SetState((Grachi::States)this->previousState);
+}
 
+void Settings::UpdateLogics(){
+	if (IsKeyPressed(KEY_ESCAPE))
+		this->backToPreviousScreen();
 }
 void Settings::Draw() {
 	BeginDrawing();
